@@ -1,4 +1,4 @@
-const connection = require('c:/Users/Admin/Desktop/Web/bookstore_web/src/database/connector.js');
+const connection = require('../database/connector.js');
 
 class BookDetailController {
   // [Get] /
