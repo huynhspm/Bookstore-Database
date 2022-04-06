@@ -1,0 +1,42 @@
+{
+  "name": "bookstore_web",
+  "version": "1.0.0",
+  "description": "",
+  "main": "main.js",
+  "scripts": {
+    "beautify": "prettier --single-quote --trailing-comma all --write src/**/*.{js,json,scss}",
+    "start": "nodemon --inspect src\\main.js",
+    "watch": "node-sass --watch src\\resources\\scss\\ --output src\\public\\css\\",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/huynhspm/bookstore_DB.git"
+  },
+  "keywords": [
+    "web",
+    "back-end",
+    "front-end",
+    "database",
+    "mysql",
+    "javascript",
+    "nodejs"
+  ],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/huynhspm/bookstore_DB/issues"
+  },
+  "homepage": "https://github.com/huynhspm/bookstore_DB#readme",
+  "dependencies": {
+    "express": "^4.17.3",
+    "express-handlebars": "^6.0.4",
+    "mysql": "^2.18.1"
+  },
+  "devDependencies": {
+    "morgan": "^1.10.0",
+    "node-sass": "^7.0.1",
+    "nodemon": "^2.0.15",
+    "prettier": "^2.6.2"
+  }
+}
