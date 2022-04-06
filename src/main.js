@@ -3,7 +3,7 @@ const express = require('express');
 const morgan = require('morgan');
 const { engine } = require('express-handlebars');
 const { urlencoded } = require('express');
-const mysql = require('mysql')
+const mysql = require('mysql');
 
 const app = express();
 const port = 3000;
