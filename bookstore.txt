@@ -1,0 +1,99 @@
+CREATE DATABASE bookstore;
+
+USE bookstore;
+
+CREATE TABLE book(
+    book_id int not null PRIMARY KEY AUTO_INCREMENT,
+    title VARCHAR(255) not null,
+    description TEXT,
+    price int not null,
+    rating int not null,
+    publisher_id int not null,
+    amount int not null,
+    image VARCHAR(255) not null
+);
+
+CREATE TABLE book_author(
+    book_id int not null,
+    author_id int not null,
+    last_update DATE,
+    PRIMARY KEY(book_id, author_id)
+);
+
+CREATE TABLE author(
+    author_id int not null PRIMARY KEY AUTO_INCREMENT,
+    name VARCHAR(255) not null,
+    age int not null
+);
+
+CREATE TABLE book_category(
+    book_id INT not null,
+    category_id INT not null,
+    last_update DATE,
+    PRIMARY KEY(book_id, category_id)
+);
+
+CREATE TABLE category(
+    category_id INT not null PRIMARY KEY AUTO_INCREMENT,
+    name VARCHAR(255) not null
+);
+
+CREATE TABLE publisher(
+    publisher_id int not null PRIMARY KEY AUTO_INCREMENT,
+    name VARCHAR(255) not null,
+    address VARCHAR(255) not null
+);
+
+CREATE TABLE customers(
+    customer_id int not null PRIMARY KEY AUTO_INCREMENT,
+    name VARCHAR(255) not null,
+    phone_number VARCHAR(255) not null
+);
+
+CREATE TABLE orders(
+    order_id int not null PRIMARY KEY AUTO_INCREMENT,
+    order_date DATETIME not null,
+    status VARCHAR(255) not null, 
+    customer_id int not null
+);
+
+CREATE TABLE orderdetails(
+    order_id int not null,
+    book_id int not null,
+    amount int not null,
+    PRIMARY KEY(order_id, book_id)
+);
+
+ALTER TABLE book_author
+    ADD CONSTRAINT fk_book_author_book FOREIGN KEY(book_id) REFERENCES book(book_id) ON DELETE RESTRICT ON UPDATE CASCADE;
+
+ALTER TABLE book_category
+    ADD CONSTRAINT fk_book_category_book FOREIGN KEY(book_id) REFERENCES book(book_id) ON DELETE RESTRICT ON UPDATE CASCADE;
+
+ALTER TABLE book
+    ADD CONSTRAINT fk_book_publisher FOREIGN KEY(publisher_id) REFERENCES publisher(publisher_id) ON DELETE RESTRICT ON UPDATE CASCADE;
+
+ALTER TABLE book_author
+    ADD CONSTRAINT fk_book_author_author FOREIGN KEY(author_id) REFERENCES author(author_id) ON DELETE RESTRICT ON UPDATE CASCADE;
+
+ALTER TABLE book_category
+    ADD CONSTRAINT fk_book_category_category FOREIGN KEY(category_id) REFERENCES category(category_id) ON DELETE RESTRICT ON UPDATE CASCADE;
+
+ALTER TABLE orderdetails
+    ADD CONSTRAINT fk_orderdetails_orders FOREIGN KEY(order_id) REFERENCES orders(order_id) ON DELETE RESTRICT ON UPDATE CASCADE;
+
+ALTER TABLE orders
+    ADD CONSTRAINT fk_orders_customers FOREIGN KEY(customer_id) REFERENCES customers(customer_id) ON DELETE RESTRICT ON UPDATE CASCADE;
+
+ALTER TABLE orderdetails
+    ADD CONSTRAINT fk_orderdetails_book FOREIGN KEY(book_id) REFERENCES book(book_id) ON DELETE RESTRICT ON UPDATE CASCADE;
+
+INSERT INTO publisher VALUES
+(1, 'NXB Trẻ', 'TP-HCM');
+
+INSERT INTO book VALUES
+(Null, 'Cho tôi xin một vé đi tuổi thơ', 'Truyện Cho Tôi Xin Một Vé Đi Tuổi Thơ là sáng tác mới nhất của nhà văn Nguyễn Nhật Ánh. Nhà văn mời người đọc lên chuyến tàu quay ngược trở lại thăm tuổi thơ và tình bạn dễ thương của 4 bạn nhỏ. Những trò chơi dễ thương thời bé, tính cách thật thà, thẳng thắn một cách thông minh và dại dột, những ước mơ tự do trong lòng… khiến cuốn sách có thể làm các bậc phụ huynh lo lắng rồi thở phào. Không chỉ thích hợp với người đọc trẻ, cuốn sách còn có thể hấp dẫn và thực sự có ích cho người lớn trong quan hệ với con mình.', 460, 4, 1, 10, 'https://salt.tikicdn.com/cache/400x400/ts/product/f2/ab/f3/3826a9aaf6d18436e5cd8b7fe8cd71ff.jpg.webp'),
+(Null, 'Mắt biếc', 'Mắt biếc là một tác phẩm được nhiều người bình chọn là hay nhất của nhà văn Nguyễn Nhật Ánh. Tác phẩm này cũng đã được dịch giả Kato Sakae dịch sang tiếng Nhật để giới thiệu với độc giả Nhật Bản. “Tôi gửi tình yêu cho mùa hè, nhưng mùa hè không giữ nổi. Mùa hè chỉ biết ra hoa, phượng đỏ sân trường và tiếng ve nỉ non trong lá. Mùa hè ngây ngô, giống như tôi vậy. Nó chẳng làm được những điều tôi ký thác. Nó để Hà Lan đốt tôi, đốt rụi. Trái tim tôi cháy thành tro, rơi vãi trên đường về.”… Bởi sự trong sáng của một tình cảm, bởi cái kết thúc buồn, rất buồn khi xuyên suốt câu chuyện vẫn là những điều vui, buồn lẫn lộn … ', 100, 4, 1, 10, 'https://salt.tikicdn.com/cache/400x400/ts/product/2b/b1/b7/60031f112d30ed96bde76d40b5b263dc.jpg.webp'),
+(Null, 'Tôi thấy hoa vàng trên cỏ xanh', 'Nội dung truyện nói vè tuổi thơ nghèo khó của hai anh em Thiều và Tường ở một làng quê Việt thân thuộc và nên thơ. Là nơi đã chứng kiến những rung động đầu đời của cả hai, tình cảm gia đình, tình anh em yêu thương chân thành, cũng như những đố kỵ, ghen tuông và những nỗi đau trong veo trong quá trình trưởng thành.Với những ký ức đã từng qua, chuyện về con cóc Cậu trời, chuyện ma, chuyện công chúa và hoàng tử, bên cạnh chuyện đói ăn, cháy nhà, lụt lội, tác giả muốn tưởng nhớ về tuổi thơ lắm ngọt ngào lẫn day dứt mà mỗi người đều đã từng trải qua khiến cho người đọc lại càng thấm đẫm tình yêu thương tuổi thơ của mình hơn.', 114, 4, 1, 10, 'https://salt.tikicdn.com/cache/400x400/ts/product/2e/ae/d3/2e400bbfda127802bf5fd46f86ead538.jpg.webp'),
+(Null, 'Làm bạn với bầu trời', 'Một câu chuyện giản dị, chứa đầy bất ngờ cho tới trang cuối cùng. Vẻ đẹp lộng lẫy, vì lòng vị tha và tình yêu thương, khiến mắt rưng rưng vì một nỗi mừng vui hân hoan. Cuốn sách như một đốm lửa thắp lên lòng khát khao sống tốt trên đời. Viết về điều tốt đã không dễ, viết sao cho người đọc có thể đón nhận đầy cảm xúc tích cực, và muốn được hưởng, được làm những điều tốt dù nhỏ bé mới thật là khó. Làm bạn với bầu trời của Nguyễn Nhật Ánh đã làm được điều này.', 100, 4, 1, 10, 'https://salt.tikicdn.com/cache/400x400/ts/product/af/a1/4b/92477ec9b6688060b2b5d2022a60d3e6.jpg.webp'),
+(Null, 'Ngồi khóc trên cây', 'Mở đầu là kỳ nghỉ hè tại một ngôi làng thơ mộng ven sông với nhân vật là những đứa trẻ mới lớn có vô vàn trò chơi đơn sơ hấp dẫn ghi dấu mãi trong lòng.   Mối tình đầu trong veo của cô bé Rùa và chàng sinh viên quê học ở thành phố có giống tình đầu của bạn thời đi học? Và cái cách họ thương nhau giấu giếm, không dám làm nhau buồn, khát khao hạnh phúc đến nghẹt thở có phải là câu chuyện chính? Bạn sẽ được tác giả dẫn đi liền một mạch trong một thứ cảm xúc rưng rưng của tình yêu thương. Bạn sẽ thấy may mắn vì đang đuợc sống trong cuộc sống này, thấy yêu thế những tấm tình người… tất cả đều đẹp hồn hậu một cách giản dị.',97, 4, 1, 10, 'https://salt.tikicdn.com/cache/400x400/ts/product/ab/e4/1d/99f8e207c44bee4ac86c06cfeaefba8e.jpg.webp');

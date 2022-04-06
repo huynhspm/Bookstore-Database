@@ -4,11 +4,11 @@ class BookController {
   // [Get] /
   show(req, res) {
     let sql = `SELECT * FROM book`;
-    connection.query(sql , function (error, results, fields) {
+    connection.query(sql, function (error, results, fields) {
       if (error) {
         return console.error(error.message);
       }
-      res.render('book/books', {books: results})
+      res.render('book/books', { books: results });
     });
   }
 }
