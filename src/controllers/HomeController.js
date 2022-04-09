@@ -1,16 +1,16 @@
 const connection = require('../database/connector.js');
 
-class BookController {
+class HomeController {
   // [Get] /
-  show(req, res) {
+  show(req, res, next) {
     let sql = `SELECT * FROM book`;
     connection.query(sql, function (error, results, fields) {
       if (error) {
         return console.error(error.message);
       }
-      res.render('book/books', { books: results });
+      res.render('home', { books: results });
     });
   }
 }
 
-module.exports = new BookController();
+module.exports = new HomeController();

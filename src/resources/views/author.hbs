@@ -1,0 +1,18 @@
+<div class = "row" >
+    <div class = "col">
+        <h2>Author</h2>
+        {{#each authors}}
+            <br>
+            <a href="/author/{{this.name}}">
+                <h2>{{this.name}}</h2>
+            </a>
+        {{/each}}
+    </div>
+    <div class = "col">
+        <h2>Address</h2>
+        {{#each authors}}
+            <br>
+            <h2>{{this.age}}</h2>
+        {{/each}}
+    </div>
+</div>

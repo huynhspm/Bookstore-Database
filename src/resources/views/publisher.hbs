@@ -1,0 +1,19 @@
+<div class = "row" >
+    <div class = "col">
+        <h2>Publisher</h2>
+        {{#each publishers}}
+            <br>
+            <a href="/publisher/{{this.name}}">
+                <h2>{{this.name}}</h2>
+            </a>
+        {{/each}}
+    </div>
+    <div class = "col">
+        <h2>Address</h2>
+        {{#each publishers}}
+            <br>
+            <h2>{{this.address}}</h2>
+        {{/each}}
+    </div>
+</div>
+

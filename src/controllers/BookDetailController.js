@@ -1,17 +1,16 @@
 const connection = require('../database/connector.js');
 
 class BookDetailController {
-  // [Get] /
+  // [Get] /books/:slug
   show(req, res) {
-    // [GET] /book/:slug
     let title = req.params.slug;
-    let sql = `SELECT * FROM book WHERE book.book_id = ${title}`;
+    let sql = `SELECT * FROM book WHERE book.title = '${title}'`;
     connection.query(sql, function (error, results, fields) {
       if (error) {
         return console.error(error.message);
       }
 
-      res.render('book/bookDetail', { book: results });
+      res.render('bookDetail', { book: results });
     });
   }
 }
