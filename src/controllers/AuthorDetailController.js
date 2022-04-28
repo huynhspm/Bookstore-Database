@@ -4,8 +4,8 @@ class AuthorDetailController {
   // [Get] /category
   show(req, res, next) {
     let name = req.params.slug;
-    let sql = `SELECT title, image, name
-                FROM book 
+    let sql = `SELECT title, b.image
+                FROM book b
                 INNER JOIN book_author
                 USING (book_id)
                 INNER JOIN author

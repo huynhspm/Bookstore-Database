@@ -1,18 +1,22 @@
-<div class = "row" >
-    <div class = "col">
-        <h2>Author</h2>
+<br>
+<br>
+<br>
+<br>
+
+<div class="container p-5 bg-light">
+    <h2 class="text-left text-dark">All Author</h2>
+    <div class="row g-4">
         {{#each authors}}
-            <br>
-            <a href="/author/{{this.name}}">
-                <h2>{{this.name}}</h2>
-            </a>
-        {{/each}}
-    </div>
-    <div class = "col">
-        <h2>Address</h2>
-        {{#each authors}}
-            <br>
-            <h2>{{this.age}}</h2>
+        <div class="col-md-6 col-lg-3">
+            <div class="card bg-dark card-book-item">
+                <a href="/author/{{this.name}}">
+                    <img class="card-img-top" src="{{this.image}}"  width="200" height="200" alt={{this.title}}>
+                </a>
+                <div class="card-body">
+                    <h5 class="card-title text-light">{{this.name}}</h5>
+                </div>
+            </div>
+        </div>
         {{/each}}
     </div>
 </div>

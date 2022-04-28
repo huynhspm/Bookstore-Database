@@ -23,7 +23,7 @@ CREATE TABLE book_author(
 CREATE TABLE author(
     author_id int not null PRIMARY KEY AUTO_INCREMENT,
     name VARCHAR(255) not null,
-    age int not null
+    image VARCHAR(255) not null
 );
 
 CREATE TABLE book_category(
@@ -103,8 +103,8 @@ INSERT INTO book VALUES
 (Null, 'Đời thừa', 'Đời Thừa đã ghi lại chân thật hình ảnh buồn thảm của người tri thức tiểu tư sản nghèo, nhà văn Nam Cao đã phác hoạ rõ nét hình ảnh vừa bi vừa hài của lớp người này trở nên đầy ám ảnh. Giá trị của " Đời Thừa " không phải chỉ ở chỗ đã miêu tả chân thật cuộc sống nghèo khổ, bế tắc của người trí thức tiểu tư sản nghèo, đã viết về người tiểu tư sản không phải với ngòi bút vuốt ve, thi vị hoá, mà còn vạch ra cả những thói xấu của họ.', 51, 4, 2, 10, 'https://salt.tikicdn.com/cache/400x400/ts/product/06/70/5d/3fec3f3b2b59fa47a0cdcfdf403f21c6.jpg.webp');
 
 INSERT INTO author VALUES
-(NULL, 'Nguyễn Nhật Ánh', 100),
-(NULL, 'Nam Cao', 100);
+(NULL, 'Nguyễn Nhật Ánh', 'https://cand.com.vn/Files/Image/linhchi/2016/09/19/47ca7ab5-f6d4-43ac-a6dd-24c48bd0647c.jpg'),
+(NULL, 'Nam Cao', 'https://soanbaionline.net/wp-content/uploads/2017/10/Nam-Cao.jpg');
 
 INSERT INTO book_author VALUES
 (1, 1, NULL),
