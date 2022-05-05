@@ -3,21 +3,20 @@
 <br>
 <br>
 
-<div class = "row" >
-    <div class = "col">
-        <h2>Publisher</h2>
+<div class="container p-5 bg-light">
+    <h2 class="text-left text-dark">All Author</h2>
+    <div class="row g-4">
         {{#each publishers}}
-            <br>
-            <a href="/publisher/{{this.name}}">
-                <h2>{{this.name}}</h2>
-            </a>
-        {{/each}}
-    </div>
-    <div class = "col">
-        <h2>Address</h2>
-        {{#each publishers}}
-            <br>
-            <h2>{{this.address}}</h2>
+        <div class="col-md-6 col-lg-3">
+            <div class="card bg-dark card-book-item">
+                <a href="/publisher/{{this.name}}">
+                    <img class="card-img-top" src="{{this.image}}"  width="200" height="200">
+                </a>
+                <div class="card-body">
+                    <h6 class="card-title text-light">{{this.name}}</h6>
+                </div>
+            </div>
+        </div>
         {{/each}}
     </div>
 </div>
