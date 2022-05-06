@@ -13,7 +13,7 @@ class PublisherDetailController {
       if (error) {
         return console.error(error.message);
       }
-      res.render('publisherDetail', { books: results, publisher: name});
+      res.render('publisherDetail', { books: results, publisher: name });
     });
   }
 }

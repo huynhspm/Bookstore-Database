@@ -1,2 +1,12 @@
 .card-book-item {
-  margin-top: 20px; }
+  margin-top: 20px;
+}
+
+body::before {
+  display: block;
+  content: '';
+  height: 60px;
+}
+
+
+

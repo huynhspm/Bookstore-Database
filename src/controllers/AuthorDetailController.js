@@ -15,7 +15,7 @@ class AuthorDetailController {
       if (error) {
         return console.error(error.message);
       }
-      res.render('authorDetail', { books: results, author: name});
+      res.render('authorDetail', { books: results, author: name });
     });
   }
 }
