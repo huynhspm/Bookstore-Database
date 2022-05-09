@@ -1,15 +1,16 @@
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top">
-    <div class="container-fluid">
+<nav class="navbar navbar-expand-lg bg-dark navbar-dark py-3 fixed-top">
+    <div class="container">
         <a class="navbar-brand" href="/">
-            <img src="https://acsantangelo1907.com/hinh-quyen-sach-va-cay-but/imager_7_19127_700.jpg" alt="" width="30" height="24" class="d-inline-block align-text-top">
-            SPM
+            <img src="https://acsantangelo1907.com/hinh-quyen-sach-va-cay-but/imager_7_19127_700.jpg"
+             width="50" height="50" class="d-inline-block align-top" alt="">
         </a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo02"
-            aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
+
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navmenu">
             <span class="navbar-toggler-icon"></span>
         </button>
-        <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
-            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+
+        <div class="collapse navbar-collapse" id="navmenu">
+            <ul class="navbar-nav ms-auto">
                 <li class="nav-item">
                     <a href="/category" class="nav-link">Category</a>
                 </li>
@@ -23,10 +24,11 @@
                     <a href="#Thịnh hành" class="nav-link">Thịnh hành</a>
                 </li>
             </ul>
-            <form class="d-flex">
-                <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-                <button class="btn btn-outline-success" type="submit">Search</button>
-            </form>
         </div>
+
+        <form class="form-inline">
+            <input class="form-control mr-sm-2" type="search" placeholder="Name of book" aria-label="Search">
+            <button class="btn btn-outline-success" type="submit">Search</button>
+        </form>
     </div>
 </nav>
