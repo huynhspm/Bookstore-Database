@@ -1,4 +1,4 @@
-const connection = require('../database/connector.js');
+const connection = require("../database/connector.js");
 
 class HomeController {
   // [Get] /
@@ -8,7 +8,7 @@ class HomeController {
       if (error) {
         return console.error(error.message);
       }
-      res.render('home', { books: results });
+      res.render("home", { books: results });
     });
   }
 }
