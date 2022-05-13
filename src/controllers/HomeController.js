@@ -8,7 +8,11 @@ class HomeController {
       if (error) {
         return console.error(error.message);
       }
-      res.render("home", { books: results });
+      
+      const results_2d = [];
+      while(results.length) results_2d.push(results.splice(0,3));
+
+      res.render("home", { books: results_2d });
     });
   }
 }
