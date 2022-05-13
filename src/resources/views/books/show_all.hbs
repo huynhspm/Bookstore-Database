@@ -1,0 +1,23 @@
+<div class="mt-4">
+    <div class="container">
+        <a href="/books/create">
+            <button>ADD NEW BOOK</button>
+        </a>
+
+        <div class="row g-4">
+            {{#each books}}
+            <div class="card col-lg-3 bg-black">
+                <div class="card bg-dark card-book-item">
+                    <a href="/books/{{this.title}}">
+                        <img class="card-img-top" src="{{this.image}}" alt={{this.title}}>
+                    </a>
+                </div>
+
+                <div class="card-body">
+                    <button>DELETE</button>
+                </div>
+            </div>
+            {{/each}}
+        </div>
+    </div>
+</div>

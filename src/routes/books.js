@@ -1,8 +1,10 @@
 const express = require('express');
 const router = express.Router();
-const booksController = require('../controllers/BooksController');
-const bookDetailController = require('../controllers/BookDetailController');
+const bookController = require('../controllers/BookController');
 
-router.get('/', booksController.show);
-router.get('/:slug', bookDetailController.show);
+router.get('/', bookController.show_all);
+router.get('/create', bookController.create);
+router.post('/store', bookController.store);
+router.get('/:slug', bookController.show_detail);
+
 module.exports = router;

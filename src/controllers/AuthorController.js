@@ -1,14 +1,32 @@
-const connection = require('../database/connector.js');
+const connection = require('../connection_database/connector.js');
 
 class AuthorController {
-  // [Get] /author
+  // [GET] /author
   show(req, res, next) {
     let sql = `SELECT * FROM author`;
     connection.query(sql, function (error, results, fields) {
       if (error) {
         return console.error(error.message);
       }
-      res.render('author', { authors: results });
+      res.render('author/show', { authors: results });
+    });
+  }
+
+  // [GET] /author/:slug
+  detail(req, res, next) {
+    let name = req.params.slug;
+    let sql = `SELECT b.title, b.image
+                FROM book b
+                INNER JOIN book_author
+                USING (book_id)
+                INNER JOIN author
+                USING (author_id)
+                WHERE name = '${name}'`;
+    connection.query(sql, function (error, results) {
+      if (error) {
+        return console.error(error.message);
+      }
+      res.render('author/detail', { books: results, author: name });
     });
   }
 }

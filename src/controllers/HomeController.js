@@ -1,7 +1,7 @@
-const connection = require("../database/connector.js");
+const connection = require("../connection_database/connector.js");
 
 class HomeController {
-  // [Get] /
+  // [GET] /
   show(req, res, next) {
     let sql = `SELECT * FROM book`;
     connection.query(sql, function (error, results, fields) {
