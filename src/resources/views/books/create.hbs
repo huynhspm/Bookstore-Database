@@ -2,29 +2,51 @@
     <h3>Thêm sách</h3>
     <form method="POST" action="/books/store">
         <div class="form-group">
-            <label for="title">Title</label> 
-            <input type="text" name = "title" class="form-control" id="title">
+            <label for="title">Title</label>
+            <input type="text" name="title" class="form-control" id="title">
         </div>
 
         <div class="form-group">
-            <label for="description">Description</label> 
-            <input type="text" name = "description" class="form-control" id="description">
+            <label for="description">Description</label>
+            <input type="text" name="description" class="form-control" id="description">
         </div>
 
         <div class="form-group">
-            <label for="author">Author</label> 
-            <input type="text" name = "author" class="form-control" id="author">
+            <label for="author">Author</label>
+            <input type="text" name="author" class="form-control" id="author">
         </div>
 
         <div class="form-group">
-            <label for="publisher">Publisher</label> 
-            <input type="text" name = "publisher" class="form-control" id="publisher">
+            <label for="publisher">Publisher</label>
+            <input type="text" name="publisher" class="form-control" id="publisher">
         </div>
 
         <div class="form-group">
-            <label for="price">Price</label> 
-            <input type="text" name = "price" class="form-control" id="price">
+            <label for="price">Price</label>
+            <input type="text" name="price" class="form-control" id="price">
         </div>
-        <button type="submit" class="btn btn-primary">Submit</button>
+        <button type="submit" class="btn btn-primary">
+            <h6>
+                Submit
+            </h6>
+        </button>
     </form>
 </div>
+
+<style>
+    * {
+        background-image: url(https://bangsaid.com/wp-content/uploads/2015/06/background-image-repeat-17-cool-hd-background-and-wallpaper.png);
+    }
+    h6{
+        color: black;
+    }
+    .mt-4{
+        background-image: none;
+        background-color: white;
+        margin-left: 10%;
+        margin-right: 10%;
+        border: 1px solid black;
+        width: 80%;
+        heigt: 500px
+    }
+</style>
