@@ -1,3 +1,9 @@
-.card-book-item {
-  margin-top: 20px;
+.carousel-control-prev-icon {
+  position: absolute;
+  left: 0px;
+}
+
+.carousel-control-next-icon {
+  position: absolute;
+  right: 0px;
 }

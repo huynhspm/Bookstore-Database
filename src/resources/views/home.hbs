@@ -1,155 +1,111 @@
-<style>
-    * {
-        box-sizing: border-box;
-    }
-
-    body {
-        font-family: Verdana, sans-serif;
-    }
-
-    .mySlides {
-        display: none;
-    }
-
-    img {
-        vertical-align: middle;
-    }
-
-    /* Slideshow container */
-    .slideshow-container {
-        max-width: 1000px;
-        position: relative;
-        margin: auto;
-    }
-
-    /* Caption text */
-    .text {
-        color: #f2f2f2;
-        font-size: 15px;
-        padding: 8px 12px;
-        position: absolute;
-        bottom: 8px;
-        width: 100%;
-        text-align: center;
-    }
-
-    /* Number text (1/3 etc) */
-    .numbertext {
-        color: #f2f2f2;
-        font-size: 12px;
-        padding: 8px 12px;
-        position: absolute;
-        top: 0;
-    }
-
-    /* The dots/bullets/indicators */
-    .dot {
-        height: 15px;
-        width: 15px;
-        margin: 0 2px;
-        background-color: #bbb;
-        border-radius: 50%;
-        display: inline-block;
-        transition: background-color 0.6s ease;
-    }
-
-    .active {
-        background-color: #717171;
-    }
-
-    /* Fading animation */
-    .fade {
-        animation-name: fade;
-        animation-duration: 5s;
-    }
-
-    @keyframes fade {
-        from {
-            opacity: .4
-        }
-
-        to {
-            opacity: 1
-        }
-    }
-
-    /* On smaller screens, decrease text size */
-    @media only screen and (max-width: 300px) {
-        .text {
-            font-size: 11px
-        }
-    }
-</style>
-
-<div class="slideshow-container">
-
-    <div class="mySlides fade">
-        <div class="numbertext">1 / 3</div>
-        <img src="img/img1.jpg" style="width:100%">
-        <div class="text">Tôi thấy hoa vàng trên cỏ xanh</div>
+<section id="Tất cả" class="p-5 bg-light">
+  <div class="container">
+    {{!-- <h2 class="text-left text-blue">Tất cả</h2> --}}
+    <div id="carouselExampleDark" class="carousel carousel-dark slide" data-bs-ride="carousel">
+      <div class="carousel-indicators">
+        <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="0" class="active"
+          aria-current="true" aria-label="Slide 1"></button>
+        <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="1" aria-label="Slide 2"></button>
+        <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="2" aria-label="Slide 3"></button>
+      </div>
+      <div class="carousel-inner rounded-5 shadow-4-strong">
+        <div class="carousel-item active" data-bs-interval="10000">
+          <img src="img/img1.jpg" class="d-block rounded mx-auto w-75" alt="...">
+        </div>
+        <div class="carousel-item" data-bs-interval="2000">
+          <img src="img/img2.jpg" class="d-block rounded mx-auto w-75" alt="...">
+        </div>
+        <div class="carousel-item">
+          <img src="img/img3.jpg" class="d-block rounded mx-auto w-75" alt="...">
+        </div>
+      </div>
+      <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleDark" data-bs-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Previous</span>
+      </button>
+      <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleDark" data-bs-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Next</span>
+      </button>
     </div>
-
-    <div class="mySlides fade">
-        <div class="numbertext">2 / 3</div>
-        <img src="img/img2.jpg" style="width:100%">
-        <div class="text">Sách tác giả Nguyễn Nhật Ánh</div>
-    </div>
-
-    <div class="mySlides fade">
-        <div class="numbertext">3 / 3</div>
-        <img src="img/img3.jpg" style="width:100%">
-        <div class="text">Sách tác giả Nguyễn Nhật Ánh</div>
-    </div>
-
-</div>
-<br>
-
-<div style="text-align:center">
-    <span class="dot"></span>
-    <span class="dot"></span>
-    <span class="dot"></span>
-</div>
-
-<script>
-    let slideIndex = 0;
-    showSlides();
-
-    function showSlides() {
-        let i;
-        let slides = document.getElementsByClassName("mySlides");
-        let dots = document.getElementsByClassName("dot");
-        for (i = 0; i < slides.length; i++) {
-            slides[i].style.display = "none";
-        }
-        slideIndex++;
-        if (slideIndex > slides.length) { slideIndex = 1 }
-        for (i = 0; i < dots.length; i++) {
-            dots[i].className = dots[i].className.replace(" active", "");
-        }
-        slides[slideIndex - 1].style.display = "block";
-        dots[slideIndex - 1].className += " active";
-        setTimeout(showSlides, 5000);
-    }
-</script>
+  </div>
+</section>
 
 
 <section id="Thịnh hành" class="p-5 bg-light">
-    <div class="container">
-        <h2 class="text-left text-dark">Thịnh hành</h2>
-        <div class="row g-5">
-            {{#each books}}
-            <div class="row g-4">
-                {{#each this}}
-                <div class="col-md-6 col-lg-3">
-                    <div class="card bg-dark card-book-item">
-                        <a href="/books/{{this.title}}">
-                            <img class="card-img-top" src="{{this.image}}" alt={{this.title}}>
-                        </a>
-                    </div>
+  <div class="container">
+    <h2 class="text-left text-dark">Thịnh hành</h2>
+    <div class="row g-4">
+      {{#each books_item}}
+      <div class="row g-4">
+        {{#each this}}
+        <div class="col-md-6 col-lg-3">
+          <div class="card bg-light">
+            <a href="/books/{{this.title}}">
+              <img class="card-img img-thumbnai" src="{{this.image}}" alt={{this.title}}>
+            </a>
+          </div>
+        </div>
+        {{/each}}
+      </div>
+      {{/each}}
+    </div>
+  </div>
+</section>
+
+<section id="Mới nhất" class="p-5 bg-light">
+  <div class="container">
+    <div class="row">
+      <div class="col-6">
+        <h2 class="text-left text-blue">Mới nhất</h2>
+      </div>
+
+      <div class="col-12">
+        <div id="carouselExampleControls" class="carousel carousel-dark slide" data-bs-ride="carousel">
+          <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls"
+            data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Previous</span>
+          </button>
+          <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls"
+            data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Next</span>
+          </button>
+
+          <div class="carousel-inner">
+            <div class="carousel-item active">
+              <div class="row">
+                {{#each books_active}}
+                <div class="col-md-3 mb-3">
+                  <div class="card bg-light">
+                    <a href="/books/{{this.title}}">
+                      <img class="card-img img-thumbnai" src="{{this.image}}" alt={{this.title}}>
+                    </a>
+                  </div>
                 </div>
                 {{/each}}
+              </div>
+            </div>
+
+            {{#each books_item}}
+            <div class="carousel-item">
+              <div class="row">
+                {{#each this}}
+                <div class="col-md-3 mb-3">
+                  <div class="card bg-light">
+                    <a href="/books/{{this.title}}">
+                      <img class="card-img img-thumbnai" src="{{this.image}}" alt={{this.title}}>
+                    </a>
+                  </div>
+                </div>
+                {{/each}}
+              </div>
             </div>
             {{/each}}
+          </div>
         </div>
+      </div>
     </div>
+  </div>
 </section>
