@@ -1,24 +1,9 @@
-<section class="p-5">
-    <div class="search_form">
-        <form class="d-flex" method="GET" action = "/books/search">
-            <input class="form-control me-2" name="title" type="search" placeholder="Search" aria-label="Search">
-            <button class="btn btn-outline-success" type="submit">Search</button>
-        </form>
-    </div>
-
-</section>
-<style>
-    .search_form{
-        margin-right: 30%;
-        margin-left: 30%;
-    }
-</style>
 <div class="mt-4">
     <div class="container">
-        <div class = "add book text-center">
+        <div class = "add book text-left font-weight-bold ">
             <a href="/books/create">
-                <button>
-                    <h3>ADD NEW BOOK</h3>
+                <button class = "btn btn-primary">
+                    <h3>Thêm sách</h3>
                 </button>
             </a>
         </div>
@@ -34,7 +19,7 @@
                 </div>
 
                 <div class="card-body">
-                    <button>DELETE</button>
+                    <button class ="rounded btn btn-primary btn-sm">DELETE</button>
                 </div>
             </div>
             {{/each}}
