@@ -16,7 +16,6 @@ CREATE TABLE book(
 CREATE TABLE book_author(
     book_id int not null,
     author_id int not null,
-    last_update DATE,
     PRIMARY KEY(book_id, author_id)
 );
 
@@ -29,7 +28,6 @@ CREATE TABLE author(
 CREATE TABLE book_category(
     book_id INT not null,
     category_id INT not null,
-    last_update DATE,
     PRIMARY KEY(book_id, category_id)
 );
 
@@ -45,25 +43,6 @@ CREATE TABLE publisher(
     image VARCHAR(255) not null
 );
 
-CREATE TABLE customers(
-    customer_id int not null PRIMARY KEY AUTO_INCREMENT,
-    name VARCHAR(255) not null,
-    phone_number VARCHAR(255) not null
-);
-
-CREATE TABLE orders(
-    order_id int not null PRIMARY KEY AUTO_INCREMENT,
-    order_date DATETIME not null,
-    status VARCHAR(255) not null, 
-    customer_id int not null
-);
-
-CREATE TABLE orderdetails(
-    order_id int not null,
-    book_id int not null,
-    amount int not null,
-    PRIMARY KEY(order_id, book_id)
-);
 
 ALTER TABLE book_author
     ADD CONSTRAINT fk_book_author_book FOREIGN KEY(book_id) REFERENCES book(book_id) ON DELETE RESTRICT ON UPDATE CASCADE;
@@ -80,20 +59,11 @@ ALTER TABLE book_author
 ALTER TABLE book_category
     ADD CONSTRAINT fk_book_category_category FOREIGN KEY(category_id) REFERENCES category(category_id) ON DELETE RESTRICT ON UPDATE CASCADE;
 
-ALTER TABLE orderdetails
-    ADD CONSTRAINT fk_orderdetails_orders FOREIGN KEY(order_id) REFERENCES orders(order_id) ON DELETE RESTRICT ON UPDATE CASCADE;
-
-ALTER TABLE orders
-    ADD CONSTRAINT fk_orders_customers FOREIGN KEY(customer_id) REFERENCES customers(customer_id) ON DELETE RESTRICT ON UPDATE CASCADE;
-
-ALTER TABLE orderdetails
-    ADD CONSTRAINT fk_orderdetails_book FOREIGN KEY(book_id) REFERENCES book(book_id) ON DELETE RESTRICT ON UPDATE CASCADE;
-
-
 INSERT INTO publisher VALUES
-(1, 'NXB Trẻ', 'TP-HCM', 'https://upload.wikimedia.org/wikipedia/vi/thumb/a/ac/NXBTrelogo.jpeg/220px-NXBTrelogo.jpeg'),
-(2, 'NXB Văn Học', 'TP-HCM', 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSRE4vd2wvr_MKlFaS8yv2Z9RwPVfrj-b3TUw&usqp=CAU'),
-(3, 'NXB Kim Đồng', 'TP-HN', 'https://salt.tikicdn.com/media/publishers/Publishers-19.jpg');
+(Null, 'NXB Trẻ', 'TP-HCM', 'https://upload.wikimedia.org/wikipedia/vi/thumb/a/ac/NXBTrelogo.jpeg/220px-NXBTrelogo.jpeg'),
+(Null, 'NXB Văn Học', 'TP-HCM', 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSRE4vd2wvr_MKlFaS8yv2Z9RwPVfrj-b3TUw&usqp=CAU'),
+(Null, 'NXB Kim Đồng', 'TP-HN', 'https://salt.tikicdn.com/media/publishers/Publishers-19.jpg'),
+(Null, 'NXB Giáo Dục', 'TP-HN', 'https://bookbuy.vn/Res/Images/Supplier/b556612f-6ba2-4f49-bb86-18629cd9f526.jpg?w=200&h=200&scale=canvas');
 
 
 INSERT INTO book VALUES
@@ -110,7 +80,11 @@ INSERT INTO book VALUES
 (Null, 'Số đỏ', 'Số đỏ xoay quanh nhân vật làm đảo điên Hà Nội những năm 1930 - 1940, Xuân Tóc Đỏ - từ một thằng bé mồ côi, kiếm sống bằng đủ thứ nghề: trèo me, trèo sấu, nhặt bóng ở sân quần vợt, quảng cáo thuốc lậu... nhờ thủ đoạn xảo trá, “nhờ thời” đã trở thành đốc tờ Xuân, nhà cải cách xã hội, giáo sư quần vợt, thậm chí là anh hùng cứu quốc, là vĩ nhân... Sử dụng lối tương phản giữa cái đồi bại, thối nát vô luân với cái hài, cái trào phúng đã giúp cuốn tiểu thuyết thành công trong việc lột trần những “quái thai” thời đại trong buổi giao thời. Từ đó, tác phẩm cũng đã đả kích cay độc cái xã hội tư sản bịp bợm, đang chạy theo lối sống văn minh rởm, hết sức lố lăng thối nát. Bên cạnh đó, tác phẩm cũng đả kích những phong trào được thực dân khuyến khích như: phong trào Âu hoá, thể dục thể thao, chấn hưng Phật giáo', 42, 4, 2, 10, 'https://salt.tikicdn.com/cache/400x400/ts/product/a7/14/57/2160a52816265cd80ea8cdc7519418f2.jpg.webp'),
 (Null, 'Dế mèn phiêu lưu ký', 'Dế mèn phiêu lưu ký là truyện dài của nhà văn Tô Hoài kể về cuộc phiêu lưu của chú Dế Mèn cùng các bạn bè.Trên đường đi, họ đã gặp phải nhiều khó khăn nguy hiểm, nhưng những gian nan đã cho họ nhiều bài học quý giá, và thắt chặt tình bạn của họ. Ngoài việc khuyến khích những người trẻ tuổi dám mơ ước, dám hành động, truyện còn là khát vọng hoà bình giữa các loài, là mong ước anh em bốn bể có thể cùng chung sống hoà thuận, để thế giới không còn cảnh xung đột, thù ghét.', 150, 4, 2, 10, 'https://salt.tikicdn.com/cache/400x400/ts/product/f1/c7/3e/2b686d818fc0f3e0fc33c9e4ff15f432.png.webp'),
 (Null, 'Quê người', 'Quê người của Tô Hoài còn cho ta thấy biết bao cái giản dị và nên thơ của người dân quê Việt Nam – những người tuy phác thực mà rất mơ màng: họ vốn là tác giả những câu ca dao bất hủ. Hãy xem cái cách hẹn hò của cặp tình nhân Hời và Ngây, cách hẹn hò ý nhị của Tristan cùng Iseut. Đông Tây có lẽ gặp nhau ở chỗ này.', 61, 4, 3, 10, 'https://salt.tikicdn.com/cache/400x400/ts/product/d8/96/da/26ba5b1bdc54e00f71a61ac84031e9d7.jpg.webp'),
-(Null, 'Thi Nhân Việt Nam', 'Thi nhân Việt Nam là công trình biên khảo có giá trị tin cậy về phong trào Thơ mới, cả về ba mặt: Nghiên cứu, phê bình và tuyển thơ. Cuốn sách ra đời sau khi hành trình thơ mới đã đi được 10 năm và vẫn còn tiếp tục chặng đường, nhưng vẫn có ý nghĩa của một công trình tổng kết cả phong trào. Cuốn sách có giá trị nghệ thuật rất cao với giọng văn tâm tình, âm điệu nhẹ nhàng và câu từ duyên dáng, dí dỏm.', 94, 4, 2, 10, 'https://salt.tikicdn.com/cache/400x400/ts/product/80/c4/f2/99957ba12810a7e48ff37f4defe1d030.jpg.webp');
+(Null, 'Thi Nhân Việt Nam', 'Thi nhân Việt Nam là công trình biên khảo có giá trị tin cậy về phong trào Thơ mới, cả về ba mặt: Nghiên cứu, phê bình và tuyển thơ. Cuốn sách ra đời sau khi hành trình thơ mới đã đi được 10 năm và vẫn còn tiếp tục chặng đường, nhưng vẫn có ý nghĩa của một công trình tổng kết cả phong trào. Cuốn sách có giá trị nghệ thuật rất cao với giọng văn tâm tình, âm điệu nhẹ nhàng và câu từ duyên dáng, dí dỏm.', 94, 4, 2, 10, 'https://salt.tikicdn.com/cache/400x400/ts/product/80/c4/f2/99957ba12810a7e48ff37f4defe1d030.jpg.webp'),
+(Null, 'Cảm ơn người lớn', 'Cảm ơn người lớn - một áng văn lãng mạn trong giọng hài hước đặc biệt “dành cho trẻ em, và những ai từng là trẻ em”.Bạn sẽ gặp lại Mùi, Tủn, Tí sún, Hải cò… của Cho tôi xin một vé đi tuổi thơ, cùng chơi những trò chơi quen thuộc, và được đắm mình vào những ước mơ điên rồ, ngốc nghếch nhưng trong veo của tuổi mới lớn hồn nhiên và đầy ắp dự định. Và cả khi họ đã trưởng thành, bạo chúa thời gian đã vùng vẫy thế nào trong cuộc đời của những nhân vật mà bạn yêu quý…', 25, 4, 1, 10, 'https://salt.tikicdn.com/cache/400x400/ts/product/5e/33/c8/3aaf850f09f76d25543635dd907c4831.jpg.webp'),
+(Null, 'Chúc một ngày tốt lành', 'Đọc tựa cuốn sách mới nhất của nhà văn Nguyễn Nhật Ánh là muốn mở ngay trang sách. Bạn sẽ thấy một thứ ngôn ngữ lạ của Hàn Quốc hay của nước nào tùy bạn đoán, Gô un un là Chào buổi sáng; Un gô gô là Chúc ngủ ngon, và nữa, Chiếp un un; Ăng gô gô; Chiếp chiếp gô…Nhân vật chính là hai con heo con, Lọ Nồi thông minh và Đeo Nơ xinh đẹp, cùng bạn chó Mõm Ngắn con chị Vện, mẹ Nái Sề, anh Đuôi Xoăn, Cánh Cụt và bọn gà chíp nhà chị Mái Hoa,… đã làm nên một câu chuyện vô cùng thú vị.', 80, 4, 1, 10, 'https://salt.tikicdn.com/cache/400x400/ts/product/3e/69/4f/bffa6b4a004449b8268f60a2b3442689.jpg.webp'),
+(Null, 'Tôi là Bêtô', 'Truyện Tôi là Bêtô là sáng tác của nhà văn Nguyễn Nhật Ánh được viết theo phong cách hoàn toàn khác so với những tác phẩm trước đây của ông. Những mẩu chuyện, hay những phát hiện của chú chó Bêtô đầy thú vị, vừa hài hước, vừa chiêm nghiệm một cách nhẹ nhàng “vô vàn những điều thú vị mà cuộc sống cố tình giấu kín ở ngóc ngách nào đó trong tâm hồn của mỗi chúng ta”.', 350, 4, 1, 10, 'https://salt.tikicdn.com/cache/400x400/ts/product/de/d7/97/b9d7489cc2602bbbd45f23b0af1d8d48.jpg.webp'),
+(Null, 'Tắt đèn', 'Theo tôi tiên tri, thì cuốn Tắt đèn còn phải sống lâu thọ hơn cả một số văn gia đương kim hôm nay. Chị Dậu, đích là tác giả Ngô Tất Tố hóa thân ra mà thôi. Chị Dậu là cái đốm sáng đặc biệt của Tắt đèn. Nếu ví toàn truyện Tắt đèn là một khóm cây thì chị Dậu là cả gốc cả ngọn cả cành, và chính chị Dậu đã nổi gió lên mà rung cho cả cái cây dạ hương Tắt đèn đó lên.', 40, 4, 4, 10, 'https://salt.tikicdn.com/cache/400x400/media/catalog/product/i/m/img843_7.jpg.webp');
 
 
 INSERT INTO author VALUES
@@ -118,21 +92,26 @@ INSERT INTO author VALUES
 (NULL, 'Nam Cao', 'https://soanbaionline.net/wp-content/uploads/2017/10/Nam-Cao.jpg'),
 (NULL, 'Nguyễn Trọng Phụng', 'https://photo-cms-vovworld.zadn.vn/w500/uploaded/vovworld/znaeng/2018_12_24/vtp_dwve.jpg'),
 (NULL, 'Tô Hoài', 'https://upload.wikimedia.org/wikipedia/vi/thumb/7/73/Nhavan_t%C3%B4_ho%C3%A0i.jpg/220px-Nhavan_t%C3%B4_ho%C3%A0i.jpg'),
-(NULL, 'Hoài Thanh', 'https://nguoinoitieng.tv/images/thumbnail/1/5a.jpg');
+(NULL, 'Hoài Thanh', 'https://nguoinoitieng.tv/images/thumbnail/1/5a.jpg'),
+(NULL, 'Ngô Tất Tố', 'https://upload.wikimedia.org/wikipedia/vi/thumb/9/92/NgoTatTo.jpg/175px-NgoTatTo.jpg');
 
 
 INSERT INTO book_author VALUES
-(1, 1, NULL),
-(2, 1, NULL),
-(3, 1, NULL),
-(4, 1, NULL),
-(5, 1, NULL),
-(6, 2, NULL),
-(7, 2, NULL),
-(8, 2, NULL),
-(9, 3, NULL),
-(10, 3, NULL),
-(11, 3, NULL),
-(12, 4, NULL),
-(13, 4, NULL),
-(14, 5, NULL);
+(1, 1),
+(2, 1),
+(3, 1),
+(4, 1),
+(5, 1),
+(6, 2),
+(7, 2),
+(8, 2),
+(9, 3),
+(10, 3),
+(11, 3),
+(12, 4),
+(13, 4),
+(14, 5),
+(15, 1),
+(16, 1),
+(17, 1),
+(18, 6);

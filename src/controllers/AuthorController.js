@@ -21,8 +21,8 @@ class AuthorController {
                 USING (book_id)
                 INNER JOIN author
                 USING (author_id)
-                WHERE name = '${name}'`;
-    connection.query(sql, function (error, results) {
+                WHERE name = ?`;
+    connection.query(sql, [name], function (error, results) {
       if (error) {
         return console.error(error.message);
       }

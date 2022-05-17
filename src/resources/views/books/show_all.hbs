@@ -1,10 +1,28 @@
+<section class="p-5">
+    <div class="search_form">
+        <form class="d-flex" method="GET" action = "/books/search">
+            <input class="form-control me-2" name="title" type="search" placeholder="Search" aria-label="Search">
+            <button class="btn btn-outline-success" type="submit">Search</button>
+        </form>
+    </div>
+
+</section>
+<style>
+    .search_form{
+        margin-right: 30%;
+        margin-left: 30%;
+    }
+</style>
 <div class="mt-4">
     <div class="container">
-        <a href="/books/create">
-            <div id="button">
-                <button>ADD NEW BOOK</button>
-            </div>
-        </a>
+        <div class = "add book text-center">
+            <a href="/books/create">
+                <button>
+                    <h3>ADD NEW BOOK</h3>
+                </button>
+            </a>
+        </div>
+        
 
         <div class="row g-4">
             {{#each books}}
@@ -14,6 +32,7 @@
                         <img class="card-img-top" src="{{this.image}}" alt={{this.title}}>
                     </a>
                 </div>
+
                 <div class="card-body">
                     <button>DELETE</button>
                 </div>

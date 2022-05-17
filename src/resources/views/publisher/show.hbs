@@ -1,14 +1,14 @@
 <div class="container p-5 bg-light">
-    <h2 class="text-left text-dark">All Author</h2>
+    <h2 class="text-left text-dark">All Publisher</h2>
     <div class="row g-4">
         {{#each publishers}}
         <div class="col-md-6 col-lg-3">
             <div class="card bg-dark card-book-item">
                 <a href="/publisher/{{this.name}}">
-                    <img class="card-img-top" src="{{this.image}}"  width="200" height="230">
+                    <img class="card-img-top" src="{{this.image}}"  width="200" height="250">
                 </a>
                 <div class="card-body">
-                    <h6 class="card-title text-light">{{this.name}}</h6>
+                    <h6 class="card-title text-light text-center">{{this.name}}</h6>
                 </div>
             </div>
         </div>
@@ -16,4 +16,3 @@
     </div>
 </div>
 
-<link rel="stylesheet" href="css/style.css">

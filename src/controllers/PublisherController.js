@@ -19,8 +19,8 @@ class PublisherController {
               FROM book b
               INNER JOIN publisher p
               ON p.publisher_id = b.publisher_id
-              WHERE p.name = '${name}'`;
-    connection.query(sql, function (error, results, fields) {
+              WHERE p.name = ?`;
+    connection.query(sql, [name], function (error, results, fields) {
       if (error) {
         return console.error(error.message);
       }
