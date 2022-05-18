@@ -5,7 +5,8 @@ const bookController = require('../controllers/BookController');
 router.get('/', bookController.show_all);
 router.get('/create', bookController.create);
 router.post('/store', bookController.store);
-router.get('/search', bookController.search);
+router.get('/edit', bookController.edit);
+router.get('/delete/:slug', bookController.delete);
 router.get('/:slug', bookController.show_detail);
 
 module.exports = router;

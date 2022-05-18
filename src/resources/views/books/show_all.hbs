@@ -1,13 +1,13 @@
 <div class="mt-4">
     <div class="container">
-        <div class = "add book text-left font-weight-bold ">
+        <div class="add book text-left font-weight-bold ">
             <a href="/books/create">
-                <button class = "btn btn-primary">
+                <button class="btn btn-primary">
                     <h3>Thêm sách</h3>
                 </button>
             </a>
         </div>
-        
+
 
         <div class="row g-4">
             {{#each books}}
@@ -18,8 +18,17 @@
                     </a>
                 </div>
 
-                <div class="card-body">
-                    <button class ="rounded btn btn-primary btn-sm">DELETE</button>
+                <div class="card-body text-center">
+                    <h2>{{this.price}}.000 VNĐ</h2>
+                    
+                    <a href="/books/delete/{{this.title}}">
+                        <button class="rounded btn btn-primary btn-sm">Xóa</button>
+                    </a>
+
+                    <a href="/books/edit">
+                        <button class="rounded btn btn-primary btn-sm">Chỉnh sửa</button>
+                    </a>
+                    
                 </div>
             </div>
             {{/each}}

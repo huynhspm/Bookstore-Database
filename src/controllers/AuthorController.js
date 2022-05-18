@@ -3,7 +3,8 @@ const connection = require('../connection_database/connector.js');
 class AuthorController {
   // [GET] /author
   show(req, res, next) {
-    let sql = `SELECT * FROM author`;
+    let sql = `SELECT * 
+              FROM author`;
     connection.query(sql, function (error, results, fields) {
       if (error) {
         return console.error(error.message);
