@@ -2,40 +2,23 @@ const connection = require("../connection_database/connector.js");
 
 class BookController {
   // [GET] /books
-  show_all(req, res) {
-    let sql = `SELECT * 
-              FROM book`;
-    connection.query(sql, function (error, results) {
-      if (error) {
-        return console.error(error.message);
-      }
-
-      res.render("books/show_all", { books: results });
-    });
+  show_all(req, res, next) {
+    show_all(res);
   }
 
   // [GET] /books/:slug
-  show_detail(req, res) {
+  show_detail(req, res, next) {
     let title = req.params.slug;
-    let sql = `SELECT * 
-              FROM book 
-              WHERE book.title =?`;
-    connection.query(sql, [title], function (error, results) {
-      if (error) {
-        return console.error(error.message);
-      }
-
-      res.render("books/show_detail", { book: results[0] });
-    });
+    show_detail(res, title);
   }
 
   // [GET] /books/create
-  create(req, res) {
+  create(req, res, next) {
     res.render("books/create");
   }
 
   // [POST] /books/store
-  store(req, res) {
+  store(req, res, next) {
     let json_data = req.body;
     let data = Object.keys(json_data).map((key) => [json_data[key]]);
 
@@ -47,33 +30,81 @@ class BookController {
     res.render("books/create");
   }
 
-  // [GET] books/update
-  edit(req, res){
-    console.log("UPDATE");
-    res.render("books/edit");
-  }
-
-  // [] books/delete
-  delete(req, res){
-    let title = req.params.slug;
-
-    let sql = `SELECT b.id 
+  // [GET] books/:id/edit
+  edit(req, res, next) {
+    let book_id = req.params.id;
+    let sql = `SELECT * 
               FROM book b
-              WHERE b.title = ?`;
+              WHERE b.book_id = ?`;
 
-    connection.query(sql, title, function (error, results) {
+    connection.query(sql, [book_id], function (error, results) {
       if (error) {
         return console.error(error.message);
       }
 
-      res.render("books/show_all", { books: results });
+      res.render("books/edit", { book: results[0] });
     });
+  }
 
-    res.send();
+  // [PUT] books/:id
+  update(req, res, next) {
+    let book_id = req.params.id;
+    let sql = `UPDATE book b
+              SET 
+                b.title = ?,
+                b.description = ?,
+                b.price = ?,
+                b.rating = ?,
+                b.amount = ?,
+                b.image = ?
+              WHERE b.book_id = ?`;
+    let json_data = req.body;
+    let book = Object.keys(json_data).map((key) => [json_data[key]]);
+    book.splice(6, 0, book_id);
+
+    connection.query(sql, book, function (error, results) {
+      if (error) {
+        return console.error(error.message);
+      }
+
+      show_all(res);
+    });
+  }
+
+  // [DELETE] books/:id
+  delete(req, res, next) {
+    let book_id = req.params.id;
+    delete_book_author(book_id);
+    res.redirect("back");
   }
 }
 
 module.exports = new BookController();
+
+function show_all(res) {
+  let sql = `SELECT * 
+              FROM book`;
+  connection.query(sql, function (error, results) {
+    if (error) {
+      return console.error(error.message);
+    }
+
+    res.render("books/show_all", { books: results });
+  });
+}
+
+function show_detail(res, title) {
+  let sql = `SELECT * 
+              FROM book 
+              WHERE book.title =?`;
+  connection.query(sql, [title], function (error, results) {
+    if (error) {
+      return console.error(error.message);
+    }
+
+    res.render("books/show_detail", { book: results[0] });
+  });
+}
 
 function add_book_author(book_id, author_id) {
   let sql = `INSERT INTO book_author VALUES (?, ?)`;
@@ -155,6 +186,22 @@ function solve_publisher(publisher, author, book) {
   });
 }
 
-function delete_book_author(book_id){
+function delete_book(book_id) {
+  let sql = `DELETE
+            FROM book
+            WHERE book_id=?`;
+  connection.query(sql, [book_id]);
+}
 
+function delete_book_author(book_id) {
+  let sql = `DELETE
+            FROM book_author
+            WHERE book_id=?`;
+  connection.query(sql, [book_id], function (error, results) {
+    if (error) {
+      return console.error(error.message);
+    }
+
+    delete_book(book_id);
+  });
 }
