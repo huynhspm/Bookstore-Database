@@ -3,6 +3,10 @@ const router = express.Router();
 const bookController = require('../controllers/BookController');
 
 router.get('/', bookController.show_all);
+router.get('/title_desc', bookController.title_desc);
+router.get('/title_asc', bookController.title_asc);
+router.get('/price_desc', bookController.price_desc);
+router.get('/price_asc', bookController.price_asc);
 router.get('/create', bookController.create);
 router.post('/store', bookController.store);
 router.get('/:id/edit', bookController.edit);

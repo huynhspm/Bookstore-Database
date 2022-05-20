@@ -3,7 +3,41 @@ const connection = require("../connection_database/connector.js");
 class BookController {
   // [GET] /books
   show_all(req, res, next) {
-    show_all(res);
+    let sql = `SELECT * 
+              FROM book b`;
+    show_all(res, sql);
+  }
+
+  //[GET] / books/title_desc
+  title_desc(req, res, next) {
+    let sql = `SELECT * 
+              FROM book b
+              ORDER BY b.title DESC`;
+    show_all(res, sql);
+  }
+  
+  //[GET] / books/title_asc
+  title_asc(req, res, next) {
+    let sql = `SELECT * 
+              FROM book b
+              ORDER BY b.title ASC`;
+    show_all(res, sql);
+  }
+
+  //[GET] / books/price_desc
+  price_desc(req, res, next) {
+    let sql = `SELECT * 
+              FROM book b
+              ORDER BY b.price DESC`;
+    show_all(res, sql);
+  }
+
+  //[GET] / books/price_asc
+  price_asc(req, res, next) {
+    let sql = `SELECT * 
+              FROM book b
+              ORDER BY b.price ASC`;
+    show_all(res, sql);
   }
 
   // [GET] /books/:slug
@@ -74,16 +108,13 @@ class BookController {
   // [DELETE] books/:id
   delete(req, res, next) {
     let book_id = req.params.id;
-    delete_book_author(book_id);
-    res.redirect("back");
+    delete_book_author(res, book_id);
   }
 }
 
 module.exports = new BookController();
 
-function show_all(res) {
-  let sql = `SELECT * 
-              FROM book`;
+function show_all(res, sql) {
   connection.query(sql, function (error, results) {
     if (error) {
       return console.error(error.message);
@@ -186,14 +217,22 @@ function solve_publisher(publisher, author, book) {
   });
 }
 
-function delete_book(book_id) {
+function delete_book(res, book_id) {
   let sql = `DELETE
             FROM book
             WHERE book_id=?`;
-  connection.query(sql, [book_id]);
+  connection.query(sql, [book_id], function(error, results){
+    if (error) {
+      return console.error(error.message);
+    }
+
+    let sql = `SELECT * 
+              FROM book b`;
+    show_all(res, sql);
+  });
 }
 
-function delete_book_author(book_id) {
+function delete_book_author(res, book_id) {
   let sql = `DELETE
             FROM book_author
             WHERE book_id=?`;
@@ -202,6 +241,6 @@ function delete_book_author(book_id) {
       return console.error(error.message);
     }
 
-    delete_book(book_id);
+    delete_book(res, book_id);
   });
 }

@@ -1,11 +1,25 @@
 <div class="mt-4">
     <div class="container">
-        <div class="add book text-left font-weight-bold ">
+        <div class="add book text-center font-weight-bold ">
             <a href="/books/create">
                 <button class="btn btn-primary">
                     <h3>Thêm sách</h3>
                 </button>
             </a>
+
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown"
+                    aria-expanded="false">
+                    Dropdown
+                </a>
+
+                <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <li><a class="dropdown-item" href="/books/title_asc">Title: A -> Z</a></li>
+                    <li><a class="dropdown-item" href="/books/title_desc">Title: Z -> A</a></li>
+                    <li><a class="dropdown-item" href="/books/price_desc">Giá giảm dần</a></li>
+                    <li><a class="dropdown-item" href="/books/price_asc">Giá tăng dần</a></li>
+                </ul>
+            </li>
         </div>
 
 
@@ -21,11 +35,11 @@
                 <div class="card-body text-center">
                     <h2>{{this.price}}.000 VNĐ</h2>
 
-                    <button class="rounded btn btn-primary btn-sm" data-bs-toggle="modal" data-id="{{this.book_id}}"
+                    <button class="rounded btn btn-danger btn-sm" data-bs-toggle="modal" data-id="{{this.book_id}}"
                         data-bs-target="#delete-book">Xóa</button>
 
                     <a href="/books/{{this.book_id}}/edit">
-                        <button class="rounded btn btn-primary btn-sm">Chỉnh sửa</button>
+                        <button class="rounded btn btn-warning btn-sm">Chỉnh sửa</button>
                     </a>
 
                 </div>

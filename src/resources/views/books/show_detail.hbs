@@ -3,13 +3,12 @@
         <div class="">
             <button class="btn btn-primary btn-sm">Đọc</button>
             <button class="btn btn-primary btn-sm">Mua</button>
-            
-            <a href="/books/{{book.id}}/delete">
-                <button class="btn btn-primary btn-sm">Xóa</button>
-            </a>
-            
+
+            <button class="btn btn-danger btn-sm" data-bs-toggle="modal" data-id="{{book.book_id}}"
+                data-bs-target="#delete-book">Xóa</button>
+
             <a href="/books/{{book.book_id}}/edit">
-                <button class="btn btn-primary btn-sm">Chỉnh sửa</button>
+                <button class="btn btn-warning btn-sm">Chỉnh sửa</button>
             </a>
         </div>
 
@@ -21,3 +20,43 @@
         </div>
     </div>
 </div>
+{{!-- Confirm delete book --}}
+<div class="modal fade" id="delete-book" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Xóa sách ?</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                Bạn chắc chắn muốn xóa quyển sách này ???
+            </div>
+            <div class="modal-footer">
+                <button id="btn-delete-book" type="button" class="btn btn-danger">Xóa bỏ</button>
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Hủy</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+{{!-- Delete hidden form --}}
+<form name="delete-book-form" method="POST"></form>
+
+<script>
+    var deleteBook = document.getElementById('delete-book');
+    var book_id;
+    var deleteForm = document.forms['delete-book-form']
+    var btnDeleteBook = document.getElementById('btn-delete-book');
+
+    deleteBook.addEventListener('show.bs.modal', function (event) {
+        var button = event.relatedTarget;
+        book_id = button.getAttribute('data-id');
+    })
+
+    console.log(btnDeleteBook);
+    btnDeleteBook.onclick = function () {
+        deleteForm.action = '/books/' + book_id + '?_method=DELETE'
+        deleteForm.submit();
+    }
+
+</script>
