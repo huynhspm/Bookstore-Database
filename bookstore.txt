@@ -11,37 +11,37 @@ CREATE TABLE book(
     publisher_id int not null,
     amount int not null,
     image VARCHAR(255) not null
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+);
 
 CREATE TABLE book_author(
     book_id int not null,
     author_id int not null,
     PRIMARY KEY(book_id, author_id)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+);
 
 CREATE TABLE author(
     author_id int not null PRIMARY KEY AUTO_INCREMENT,
     name VARCHAR(255) not null,
     image VARCHAR(255) not null
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+);
 
 CREATE TABLE book_category(
     book_id INT not null,
     category_id INT not null,
     PRIMARY KEY(book_id, category_id)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+);
 
 CREATE TABLE category(
     category_id INT not null PRIMARY KEY AUTO_INCREMENT,
     name VARCHAR(255) not null
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+);
 
 CREATE TABLE publisher(
     publisher_id int not null PRIMARY KEY AUTO_INCREMENT,
     name VARCHAR(255) not null,
     address VARCHAR(255) not null,
     image VARCHAR(255) not null
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+);
 
 
 ALTER TABLE book_author
