@@ -5,19 +5,34 @@ class HomeController {
   show(req, res, next) {
     let sql = `SELECT * 
               FROM book b 
-              ORDER BY b.rating 
               LIMIT 12`;
+    
     connection.query(sql, function (error, results, fields) {
       if (error) {
         return console.error(error.message);
       }
 
-      const results_2d = [];
-      while (results.length) results_2d.push(results.splice(0, 4));
+      const book = [];
+      while (results.length) book.push(results.splice(0, 4));
+      
+      let sql = `SELECT * 
+              FROM book b 
+              ORDER BY b.rating DESC
+              LIMIT 12`;
+      connection.query(sql, function (error, results, fields) {
+        if (error) {
+          return console.error(error.message);
+        } 
+        
+        const book_rating = [];
+        while (results.length) book_rating.push(results.splice(0, 4));
 
-      res.render("home", {
-        books_active: results_2d[0],
-        books_item: results_2d.splice(1, 3),
+        res.render("home", {
+          books_active: book[0],
+          books_item: book.splice(1, 3),
+          books_rating_active: book_rating[0],
+          books_rating_item: book_rating.splice(1, 3)
+        });
       });
     });
   }
@@ -39,7 +54,7 @@ function search_publisher(res, keyword) {
             WHERE p.name = ?`;
   connection.query(sql, keyword, function (error, results) {
     if (results.length == 0) {
-      res.send('');
+      res.redirect('back');
     } else {
       res.render("publisher/detail", { books: results, publisher: keyword });
     }

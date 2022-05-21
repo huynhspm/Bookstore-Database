@@ -96,12 +96,16 @@ class BookController {
     let book = Object.keys(json_data).map((key) => [json_data[key]]);
     book.splice(6, 0, book_id);
 
+    console.log(book)
+
     connection.query(sql, book, function (error, results) {
       if (error) {
         return console.error(error.message);
       }
 
-      show_all(res);
+      let sql = `SELECT * 
+              FROM book b`;
+      show_all(res, sql);
     });
   }
 
@@ -120,7 +124,7 @@ function show_all(res, sql) {
       return console.error(error.message);
     }
 
-    res.render("books/show_all", { books: results });
+    res.render("books/show_all", { books: results});
   });
 }
 

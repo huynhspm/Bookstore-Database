@@ -6,7 +6,7 @@
                     <h3>Thêm sách</h3>
                 </button>
             </a>
-            
+
             <li class="nav-item dropdown" style="list-style: none;">
                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown"
                     aria-expanded="false">
@@ -20,7 +20,7 @@
                     <li><a class="dropdown-item" href="/books/price_asc">Giá tăng dần</a></li>
                 </ul>
             </li>
-            
+
         </div>
 
 
@@ -37,13 +37,11 @@
                     <h2>{{this.price}}.000 VNĐ</h2>
 
                     <div class="text-center">
-                        <span class="fa fa-star"></span>
-                        <span class="fa fa-star"></span>
-                        <span class="fa fa-star"></span>
-                        <span class="fa fa-star"></span>
-                        <span class="fa fa-star"></span>
+                        <span class="fa fa-star" style="color:purple"></span>
+                        <span class="fa fa-star" style="color:purple"></span>
+                        <span class="fa fa-star" style="color:purple"></span>
                     </div>
-                    
+
                     <button class="rounded btn btn-danger btn-sm" data-bs-toggle="modal" data-id="{{this.book_id}}"
                         data-bs-target="#delete-book">Xóa</button>
 
@@ -91,10 +89,8 @@
         book_id = button.getAttribute('data-id');
     })
 
-    console.log(btnDeleteBook);
     btnDeleteBook.onclick = function () {
         deleteForm.action = '/books/' + book_id + '?_method=DELETE'
         deleteForm.submit();
     }
-
 </script>

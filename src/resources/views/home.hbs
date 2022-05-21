@@ -31,43 +31,21 @@
   </div>
 </section>
 
-
-<section id="Thịnh hành" class="p-5 bg-light">
-  <div class="container">
-    <h2 class="text-left text-dark">Thịnh hành</h2>
-    <div class="row g-4">
-      {{#each books_item}}
-      <div class="row g-4">
-        {{#each this}}
-        <div class="col-md-6 col-lg-3">
-          <div class="card bg-light">
-            <a href="/books/{{this.title}}">
-              <img class="card-img img-thumbnai" src="{{this.image}}" alt={{this.title}}>
-            </a>
-          </div>
-        </div>
-        {{/each}}
-      </div>
-      {{/each}}
-    </div>
-  </div>
-</section>
-
-<section id="Mới nhất" class="p-5 bg-light">
+<section id="Popular" class="p-5 bg-light">
   <div class="container">
     <div class="row">
       <div class="col-6">
-        <h2 class="text-left text-blue">Mới nhất</h2>
+        <h2 class="text-left text-blue">Thịnh Hành</h2>
       </div>
 
       <div class="col-12">
-        <div id="carouselExampleControls" class="carousel carousel-dark slide" data-bs-ride="carousel">
-          <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls"
+        <div id="button-popular" class="carousel carousel-dark slide" data-bs-ride="carousel">
+          <button class="carousel-control-prev" type="button" data-bs-target="#button-popular"
             data-bs-slide="prev">
             <span class="carousel-control-prev-icon" aria-hidden="true"></span>
             <span class="visually-hidden">Previous</span>
           </button>
-          <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls"
+          <button class="carousel-control-next" type="button" data-bs-target="#button-popular"
             data-bs-slide="next">
             <span class="carousel-control-next-icon" aria-hidden="true"></span>
             <span class="visually-hidden">Next</span>
@@ -89,6 +67,63 @@
             </div>
 
             {{#each books_item}}
+            <div class="carousel-item">
+              <div class="row">
+                {{#each this}}
+                <div class="col-md-3 mb-3">
+                  <div class="card bg-light">
+                    <a href="/books/{{this.title}}">
+                      <img class="card-img img-thumbnai" src="{{this.image}}" alt={{this.title}}>
+                    </a>
+                  </div>
+                </div>
+                {{/each}}
+              </div>
+            </div>
+            {{/each}}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="Latest" class="p-5 bg-light">
+  <div class="container">
+    <div class="row">
+      <div class="col-6">
+        <h2 class="text-left text-blue">Mới nhất</h2>
+      </div>
+
+      <div class="col-12">
+        <div id="button-latest" class="carousel carousel-dark slide" data-bs-ride="carousel">
+          <button class="carousel-control-prev" type="button" data-bs-target="#button-latest"
+            data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Previous</span>
+          </button>
+          <button class="carousel-control-next" type="button" data-bs-target="#button-latest"
+            data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Next</span>
+          </button>
+
+          <div class="carousel-inner">
+            <div class="carousel-item active">
+              <div class="row">
+                {{#each books_rating_active}}
+                <div class="col-md-3 mb-3">
+                  <div class="card bg-light">
+                    <a href="/books/{{this.title}}">
+                      <img class="card-img img-thumbnai" src="{{this.image}}" alt={{this.title}}>
+                    </a>
+                  </div>
+                </div>
+                {{/each}}
+              </div>
+            </div>
+
+            {{#each books_rating_item}}
             <div class="carousel-item">
               <div class="row">
                 {{#each this}}

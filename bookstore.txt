@@ -25,17 +25,6 @@ CREATE TABLE author(
     image VARCHAR(255) not null
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-CREATE TABLE book_category(
-    book_id INT not null,
-    category_id INT not null,
-    PRIMARY KEY(book_id, category_id)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
-CREATE TABLE category(
-    category_id INT not null PRIMARY KEY AUTO_INCREMENT,
-    name VARCHAR(255) not null
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
 CREATE TABLE publisher(
     publisher_id int not null PRIMARY KEY AUTO_INCREMENT,
     name VARCHAR(255) not null,
@@ -47,24 +36,17 @@ CREATE TABLE publisher(
 ALTER TABLE book_author
     ADD CONSTRAINT fk_book_author_book FOREIGN KEY(book_id) REFERENCES book(book_id) ON DELETE RESTRICT ON UPDATE CASCADE;
 
-ALTER TABLE book_category
-    ADD CONSTRAINT fk_book_category_book FOREIGN KEY(book_id) REFERENCES book(book_id) ON DELETE RESTRICT ON UPDATE CASCADE;
-
 ALTER TABLE book
     ADD CONSTRAINT fk_book_publisher FOREIGN KEY(publisher_id) REFERENCES publisher(publisher_id) ON DELETE RESTRICT ON UPDATE CASCADE;
 
 ALTER TABLE book_author
     ADD CONSTRAINT fk_book_author_author FOREIGN KEY(author_id) REFERENCES author(author_id) ON DELETE RESTRICT ON UPDATE CASCADE;
 
-ALTER TABLE book_category
-    ADD CONSTRAINT fk_book_category_category FOREIGN KEY(category_id) REFERENCES category(category_id) ON DELETE RESTRICT ON UPDATE CASCADE;
-
 INSERT INTO publisher VALUES
 (Null, 'NXB Trẻ', 'TP-HCM', 'https://upload.wikimedia.org/wikipedia/vi/thumb/a/ac/NXBTrelogo.jpeg/220px-NXBTrelogo.jpeg'),
 (Null, 'NXB Văn Học', 'TP-HCM', 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSRE4vd2wvr_MKlFaS8yv2Z9RwPVfrj-b3TUw&usqp=CAU'),
 (Null, 'NXB Kim Đồng', 'TP-HN', 'https://salt.tikicdn.com/media/publishers/Publishers-19.jpg'),
 (Null, 'NXB Giáo Dục', 'TP-HN', 'https://bookbuy.vn/Res/Images/Supplier/b556612f-6ba2-4f49-bb86-18629cd9f526.jpg?w=200&h=200&scale=canvas');
-
 
 INSERT INTO book VALUES
 (Null, 'Cho tôi xin một vé đi tuổi thơ', 'Truyện Cho Tôi Xin Một Vé Đi Tuổi Thơ là sáng tác mới nhất của nhà văn Nguyễn Nhật Ánh. Nhà văn mời người đọc lên chuyến tàu quay ngược trở lại thăm tuổi thơ và tình bạn dễ thương của 4 bạn nhỏ. Những trò chơi dễ thương thời bé, tính cách thật thà, thẳng thắn một cách thông minh và dại dột, những ước mơ tự do trong lòng… khiến cuốn sách có thể làm các bậc phụ huynh lo lắng rồi thở phào. Không chỉ thích hợp với người đọc trẻ, cuốn sách còn có thể hấp dẫn và thực sự có ích cho người lớn trong quan hệ với con mình.', 460, 4, 1, 10, 'https://salt.tikicdn.com/cache/400x400/ts/product/f2/ab/f3/3826a9aaf6d18436e5cd8b7fe8cd71ff.jpg.webp'),
@@ -80,11 +62,33 @@ INSERT INTO book VALUES
 (Null, 'Số đỏ', 'Số đỏ xoay quanh nhân vật làm đảo điên Hà Nội những năm 1930 - 1940, Xuân Tóc Đỏ - từ một thằng bé mồ côi, kiếm sống bằng đủ thứ nghề: trèo me, trèo sấu, nhặt bóng ở sân quần vợt, quảng cáo thuốc lậu... nhờ thủ đoạn xảo trá, “nhờ thời” đã trở thành đốc tờ Xuân, nhà cải cách xã hội, giáo sư quần vợt, thậm chí là anh hùng cứu quốc, là vĩ nhân... Sử dụng lối tương phản giữa cái đồi bại, thối nát vô luân với cái hài, cái trào phúng đã giúp cuốn tiểu thuyết thành công trong việc lột trần những “quái thai” thời đại trong buổi giao thời. Từ đó, tác phẩm cũng đã đả kích cay độc cái xã hội tư sản bịp bợm, đang chạy theo lối sống văn minh rởm, hết sức lố lăng thối nát. Bên cạnh đó, tác phẩm cũng đả kích những phong trào được thực dân khuyến khích như: phong trào Âu hoá, thể dục thể thao, chấn hưng Phật giáo', 42, 4, 2, 10, 'https://salt.tikicdn.com/cache/400x400/ts/product/a7/14/57/2160a52816265cd80ea8cdc7519418f2.jpg.webp'),
 (Null, 'Dế mèn phiêu lưu ký', 'Dế mèn phiêu lưu ký là truyện dài của nhà văn Tô Hoài kể về cuộc phiêu lưu của chú Dế Mèn cùng các bạn bè.Trên đường đi, họ đã gặp phải nhiều khó khăn nguy hiểm, nhưng những gian nan đã cho họ nhiều bài học quý giá, và thắt chặt tình bạn của họ. Ngoài việc khuyến khích những người trẻ tuổi dám mơ ước, dám hành động, truyện còn là khát vọng hoà bình giữa các loài, là mong ước anh em bốn bể có thể cùng chung sống hoà thuận, để thế giới không còn cảnh xung đột, thù ghét.', 150, 4, 2, 10, 'https://salt.tikicdn.com/cache/400x400/ts/product/f1/c7/3e/2b686d818fc0f3e0fc33c9e4ff15f432.png.webp'),
 (Null, 'Quê người', 'Quê người của Tô Hoài còn cho ta thấy biết bao cái giản dị và nên thơ của người dân quê Việt Nam – những người tuy phác thực mà rất mơ màng: họ vốn là tác giả những câu ca dao bất hủ. Hãy xem cái cách hẹn hò của cặp tình nhân Hời và Ngây, cách hẹn hò ý nhị của Tristan cùng Iseut. Đông Tây có lẽ gặp nhau ở chỗ này.', 61, 4, 3, 10, 'https://salt.tikicdn.com/cache/400x400/ts/product/d8/96/da/26ba5b1bdc54e00f71a61ac84031e9d7.jpg.webp'),
-(Null, 'Thi Nhân Việt Nam', 'Thi nhân Việt Nam là công trình biên khảo có giá trị tin cậy về phong trào Thơ mới, cả về ba mặt: Nghiên cứu, phê bình và tuyển thơ. Cuốn sách ra đời sau khi hành trình thơ mới đã đi được 10 năm và vẫn còn tiếp tục chặng đường, nhưng vẫn có ý nghĩa của một công trình tổng kết cả phong trào. Cuốn sách có giá trị nghệ thuật rất cao với giọng văn tâm tình, âm điệu nhẹ nhàng và câu từ duyên dáng, dí dỏm.', 94, 4, 2, 10, 'https://salt.tikicdn.com/cache/400x400/ts/product/80/c4/f2/99957ba12810a7e48ff37f4defe1d030.jpg.webp'),
+(Null, 'Thi nhân Việt Nam', 'Thi nhân Việt Nam là công trình biên khảo có giá trị tin cậy về phong trào Thơ mới, cả về ba mặt: Nghiên cứu, phê bình và tuyển thơ. Cuốn sách ra đời sau khi hành trình thơ mới đã đi được 10 năm và vẫn còn tiếp tục chặng đường, nhưng vẫn có ý nghĩa của một công trình tổng kết cả phong trào. Cuốn sách có giá trị nghệ thuật rất cao với giọng văn tâm tình, âm điệu nhẹ nhàng và câu từ duyên dáng, dí dỏm.', 94, 4, 2, 10, 'https://salt.tikicdn.com/cache/400x400/ts/product/80/c4/f2/99957ba12810a7e48ff37f4defe1d030.jpg.webp'),
 (Null, 'Cảm ơn người lớn', 'Cảm ơn người lớn - một áng văn lãng mạn trong giọng hài hước đặc biệt “dành cho trẻ em, và những ai từng là trẻ em”.Bạn sẽ gặp lại Mùi, Tủn, Tí sún, Hải cò… của Cho tôi xin một vé đi tuổi thơ, cùng chơi những trò chơi quen thuộc, và được đắm mình vào những ước mơ điên rồ, ngốc nghếch nhưng trong veo của tuổi mới lớn hồn nhiên và đầy ắp dự định. Và cả khi họ đã trưởng thành, bạo chúa thời gian đã vùng vẫy thế nào trong cuộc đời của những nhân vật mà bạn yêu quý…', 25, 4, 1, 10, 'https://salt.tikicdn.com/cache/400x400/ts/product/5e/33/c8/3aaf850f09f76d25543635dd907c4831.jpg.webp'),
 (Null, 'Chúc một ngày tốt lành', 'Đọc tựa cuốn sách mới nhất của nhà văn Nguyễn Nhật Ánh là muốn mở ngay trang sách. Bạn sẽ thấy một thứ ngôn ngữ lạ của Hàn Quốc hay của nước nào tùy bạn đoán, Gô un un là Chào buổi sáng; Un gô gô là Chúc ngủ ngon, và nữa, Chiếp un un; Ăng gô gô; Chiếp chiếp gô…Nhân vật chính là hai con heo con, Lọ Nồi thông minh và Đeo Nơ xinh đẹp, cùng bạn chó Mõm Ngắn con chị Vện, mẹ Nái Sề, anh Đuôi Xoăn, Cánh Cụt và bọn gà chíp nhà chị Mái Hoa,… đã làm nên một câu chuyện vô cùng thú vị.', 80, 4, 1, 10, 'https://salt.tikicdn.com/cache/400x400/ts/product/3e/69/4f/bffa6b4a004449b8268f60a2b3442689.jpg.webp'),
 (Null, 'Tôi là Bêtô', 'Truyện Tôi là Bêtô là sáng tác của nhà văn Nguyễn Nhật Ánh được viết theo phong cách hoàn toàn khác so với những tác phẩm trước đây của ông. Những mẩu chuyện, hay những phát hiện của chú chó Bêtô đầy thú vị, vừa hài hước, vừa chiêm nghiệm một cách nhẹ nhàng “vô vàn những điều thú vị mà cuộc sống cố tình giấu kín ở ngóc ngách nào đó trong tâm hồn của mỗi chúng ta”.', 350, 4, 1, 10, 'https://salt.tikicdn.com/cache/400x400/ts/product/de/d7/97/b9d7489cc2602bbbd45f23b0af1d8d48.jpg.webp'),
-(Null, 'Tắt đèn', 'Theo tôi tiên tri, thì cuốn Tắt đèn còn phải sống lâu thọ hơn cả một số văn gia đương kim hôm nay. Chị Dậu, đích là tác giả Ngô Tất Tố hóa thân ra mà thôi. Chị Dậu là cái đốm sáng đặc biệt của Tắt đèn. Nếu ví toàn truyện Tắt đèn là một khóm cây thì chị Dậu là cả gốc cả ngọn cả cành, và chính chị Dậu đã nổi gió lên mà rung cho cả cái cây dạ hương Tắt đèn đó lên.', 40, 4, 4, 10, 'https://salt.tikicdn.com/cache/400x400/media/catalog/product/i/m/img843_7.jpg.webp');
+(Null, 'Tắt đèn', 'Theo tôi tiên tri, thì cuốn Tắt đèn còn phải sống lâu thọ hơn cả một số văn gia đương kim hôm nay. Chị Dậu, đích là tác giả Ngô Tất Tố hóa thân ra mà thôi. Chị Dậu là cái đốm sáng đặc biệt của Tắt đèn. Nếu ví toàn truyện Tắt đèn là một khóm cây thì chị Dậu là cả gốc cả ngọn cả cành, và chính chị Dậu đã nổi gió lên mà rung cho cả cái cây dạ hương Tắt đèn đó lên.', 40, 4, 4, 10, 'https://salt.tikicdn.com/cache/400x400/media/catalog/product/i/m/img843_7.jpg.webp'),
+(Null, 'Trúng số độc đắc', 'Trúng số độc đắc là câu chuyện về sự phá sản của giá trị con người trước mãnh lực đồng tiền. Bất cứ ai, một khi tiếp xúc với đồng tiền đều bị nó đè bẹp. Mọi nhân vật đều bị "đốt cháy" thành than đen, dù đó là thượng lưu trí thức hay kẻ hạ lưu vô học, là người thông minh hay kẻ dốt nát. Trước mãnh lực của tiền, tất thảy đều thuần phục một cách hèn hạ, không loại trừ thành phần, giới chức nào trong xã hội.', 48, 3, 2, 10, 'https://salt.tikicdn.com/cache/400x400/ts/product/60/90/f3/5cce12cc750e6e549fc1a24c221dbad0.jpg.webp'),
+(Null, 'Đất rừng phương nam', 'Cuộc đời lưu lạc của chú bé An qua những miền đất rừng phương Nam thời kì đầu cuộc kháng chiến chống Pháp. Một vùng đất trù phú, đa dạng, kì vĩ với những kênh rạch, tôm cá, chim chóc, muông thú, lúa gạ và cây cối, rừng già. Trong thế giới đó có những con người vô cùng nhân hậu như cha mẹ nuôi của bé An, như cậu bé Cò, chú Võ Tò cùng những người anh em giàu lòng yêu quê hương, đất nước. Cuộc sống tự do và cuộc đời phóng khoáng cởi mở đã để lại ấn tượng sâu sắc trong tâm khảm người đọc nhiều thế hệ suốt những năm tháng qua.', 65, 3, 4, 10, 'https://salt.tikicdn.com/cache/400x400/ts/product/23/b4/a0/fcd38961765d220d3208ec77f4ef65f7.jpg.webp'),
+(Null, 'Việc làng', 'Việc Làng là tác phẩm của Ngô Tất Tố, một tên tuổi vĩ đại của nền văn học nước nhà, ông đã có những đóng góp vô cùng to lớn vào tiến trình văn học Việt Nam hiện đại. Những trang viết của cụ Tố truyền tải đến chúng ta những thực tế nhức nhối trong sinh hoạt của người nông dân và nông thôn Việt Nam trước năm 1945.', 35, 3, 4, 10, 'https://salt.tikicdn.com/cache/400x400/ts/product/d2/d2/dc/c17f806e44b6e074ae4d5de04f4892dd.jpg.webp'),
+(Null, 'Giữ gìn 36 phố phường', '36 phố phường vẫn đứng yên thế, nhưng cũng lại luôn chuyển động theo thời gian và lịch sử mỗi thời kỳ. Nó là một bảo tàng ngoài trời, bảo tàng ở giữa sinh hoạt thành phố, không tách khỏi đời sống – một lưu niệm sâu sắc ý nghĩa giáo dục truyền thố', 77, 3, 4, 10, 'https://salt.tikicdn.com/cache/400x400/ts/product/31/d5/9c/2b29a3bea56099a37acff742acf1f789.jpg.webp'),
+(Null, 'Hà Nội băm sáu phố phường', 'Văn học Việt Nam thời xưa có nhiều tác phẩm có giá trị to lớn về mặt nhân văn và nghệ thuật, đã được công nhận và chứng thực qua thời gian. Bộ sách Việt Nam danh tác bao gồm loạt tác phẩm đi cùng năm tháng như: Số đỏ (Vũ Trọng Phụng), Việc làng (Ngô Tất Tố), Gió đầu mùa, Hà Nội băm sáu phố phường (Thạch Lam), Miếng ngon Hà Nội (Vũ Bằng), Vang bóng một thời (Nguyễn Tuân). Hy vọng bộ sách sau khi tái bản sẽ giúp đông đảo tầng lớp độc giả thêm hiểu, tự hào và nâng niu kho tàng văn học nước nhà.', 105, 3, 2, 10, 'https://salt.tikicdn.com/cache/400x400/ts/product/cb/12/37/fea3182beb9b6d6c917aa683cba93284.jpg.webp'),
+(Null, 'Gió lạnh đầu mùa', 'Gió lạnh đầu mùa tập hợp toàn bộ những tác phẩm trong tập truyện ngắn "Gió đầu mùa" của nhà văn Thạch Lam. Cuốn sách bao gồm các truyện: Đứa con đầu lòng, Nhà mẹ Lê, Trở về… Trong những truyện ngắn của ông người ta thấm thía nỗi khổ đau, bất hạnh, hoàn cảnh éo le của những con người nghèo khổ vừa cảm nhận sâu sắc tình người ấm nồng, cao quý, thiêng liêng.', 35, 3, 3, 10, 'https://salt.tikicdn.com/cache/400x400/media/catalog/product/i/m/img162_17.jpg.webp'),
+(Null, 'Những ngày thơ ấu', 'Những Ngày Thơ Ấu là câu chuyện chắp vá về tuổi thơ đầy đau thương của chính tác giả. Hồng - một cậu bé sinh ra trong gia đình giàu có nhưng lại không mấy hạnh phúc. Ngay từ khi còn nhỏ, cậu đã thấu hiểu được sự thờ ơ, vô trách nhiệm của người cha nghiện ngập, và những nỗi đau đớn, tủi nhục của người mẹ khi luôn bị cả gia tộc giày xéo, đầy đọa đến mức phải bỏ cả con cái đi tha hương cầu thực. Với ngôn từ giản dị và trong sáng, Những Ngày Thơ Ấu không chỉ đem đến cho độc giả câu chuyện bình dị, gần gũi với đời thường mà nó còn lột tả được một bối cảnh xã hội phong kiến, cổ hủ của Việt Nam thời xưa', 35, 3, 3, 10, 'https://salt.tikicdn.com/cache/400x400/ts/product/90/5d/eb/cf59cc1d8ebc478eba546401eac50e56.jpg.webp'),
+(Null, 'Vợ nhặt', 'Trong khung cảnh đen trắng ảm đạm của nạn đói năm Ất Dậu 1944 – 1945, “Vợ nhặt” hiện lên như vài nét chấm phá nhợt nhạt mà ấm áp, là hơi ấm của tình người, là khát khao được sống, là hy vọng về một tương lai tốt đẹp nơi lá cờ đỏ của Việt Minh bay phất phới… Tác phẩm là áng văn chương hiện thực mà hết sức nhân đạo của cây bút truyện ngắn vững vàng Kim Lân.', 53, 3, 2, 10, 'https://salt.tikicdn.com/cache/400x400/ts/product/1a/bf/87/24d7a37e0f4d678bfb86ee440b92bcb4.jpg.webp'),
+(Null, 'Tuổi thơ dữ dội', 'Tuổi Thơ Dữ Dội là một câu chuyện hay, cảm động viết về tuổi thơ. Sách dày 404 trang mà người đọc không bao giờ muốn ngừng lại, bị lôi cuốn vì những nhân vật ngây thơ có, khôn ranh có, anh hùng có, vì những sự việc khi thì ly kỳ, khi thì hài hước, khi thì gây xúc động đến ứa nước mắt', 56, 3, 3, 10, 'https://salt.tikicdn.com/cache/400x400/ts/product/29/a4/53/a833aaa57109403c6cd173fab04a1941.jpg.webp'),
+(Null, 'Giông tố', 'Như vậy cái tên ngay từ đầu đã là “Giông tố” – một cái tên rất đúng với tinh thần của tác phẩm – xã hội thuộc địa nửa phong kiến được phản ánh trong cuốn tiểu thuyết là một xã hội đương trong cơn giông tố, mà trong lòng mỗi người của xã hội cũng trải qua cơn giông tố của đời mình. Tất cả đều đảo điên, đều tanh bành, lật tẩy mọi thứ mặt nạ đắp điếm lên cái bản chất bất công, đểu giả, thối nát và hết sức vô nghĩa lý của xã hội mà đồng tiền có thể chi phối tất cả – xã hội Việt Nam thời Pháp thuộc', 84, 3, 2, 10, 'https://salt.tikicdn.com/cache/400x400/ts/product/eb/c6/f4/2bcb37da9c5b0ab7b71207d547aed2a2.jpg.webp'),
+(Null, 'Vang bóng một thời', 'Tập truyện đã làm sống lại cả một thời phong kiến đã qua với những nghệ thuật cổ thanh cao, những nếp sống, sinh hoạt xã hội nho phong của một nền văn minh xưa cũ, nó cũng là niềm nuối tiếc của một tâm hồn hoài cổ trước những cái hay, cái đẹp, những nghệ thuật cầu kỳ của một thời đại đã qua, cái thời ấy nay đã chết rồi, chỉ còn để lại một tiếng vang', 56, 3, 3, 10, 'https://salt.tikicdn.com/cache/400x400/ts/product/fb/dc/0e/6715f0a2522bd643b4615ac5b1864ae0.jpg.webp'),
+(Null, 'Sóng ở đáy sông', 'Tiểu thuyết “Sóng ở đáy sông – Lê Lựu” kể về một chuỗi những sai lầm liên tiếp của một cuộc đời: Núi – người được sinh ra bởi sai lầm của người cha, sau những lần “không thể kìm hãm trước con ở đang thời bừng dậy rừng rực”. Một số phận không mong muốn. Một khoảng cách không thể kết nối lại gần với những gì được gọi là chính thống, được sự thừa nhận hợp pháp. Cuộc đời Núi trượt dài trong tăm tối. Bất hạnh đeo đẳng. Chiến tranh và một thời kỳ bao cấp có thể khiến con người ta trở nên vĩ đại hoặc thấp hèn…', 80, 2, 3, 10, 'https://salt.tikicdn.com/cache/400x400/ts/product/77/55/5a/8dce4cda3cf978a27c73a9bf95919405.jpg.webp'),
+(Null, 'Bỉ vỏ', 'Truyện ngắn Bỉ Vỏ của nhà văn Nguyên Hồng là một tác phẩm tiêu biểu cho dòng văn hiện thực phê phán. Cả câu chuyện là tiếng kêu xé lòng của một phận người hèn mọn, tuy luôn khao khát một cuộc sống lương thiện nhưng bị cuộc đời vùi dập đến tiêu điều', 35, 3, 2, 10, 'https://salt.tikicdn.com/cache/400x400/ts/product/b9/62/22/411f7fb9c73c359d0d4a449f33ece256.jpg.webp'),
+(Null, 'Thời xa vắng', 'Đến với tác phẩm Thời Xa Vắng, tác giả Lê Lựu đã tái hiện thành công những lát cắt thời đại, với những mâu thuẫn giằng xé trong nội tâm mỗi con người. Thời gian trôi đi, tiểu thuyết này vẫn còn nguyên giá trị với xã hội Việt Nam.', 67, 3, 1, 10, 'https://salt.tikicdn.com/cache/400x400/ts/product/80/f9/5b/a294246e7018c5febe66624364800064.jpg.webp'),
+(Null, 'Bước đường cùng', 'truyện ngắn Bước Đường Cùng của Nguyễn Công Hoan nổi lên như những thước phim gai góc, khiến người đọc căm tức đến khôn cùng. Phẫn uất vì xã hội bất công, thương thay cho những kiếp người thấp cổ bé họng. Đọc sách để vạch trần những gian dối, cay đắng và nỗi tủi nhục của biết bao kiếp người', 37, 3, 4, 10, 'https://salt.tikicdn.com/cache/400x400/media/catalog/product/b/u/buoc-duong-cung.jpg.webp'),
+(Null, 'Lá ngọc cành vàng', 'Lá ngọc cành vàng kể về Nga một nàng tiểu thư con quan tri phủ đem lòng yêu thương tình si gởi đến cho Chi, con trai của một mụ bán hàng quán góa chồng nghèo xơ xác. Gia đình quan tri phủ biết được thì tìm mọi cách ngăn cản cấm đoán mối tình ngang trái ấy. Ông quan tri phủ cho rằng cái mối tình không môn đăng hộ đối ấy là một tội bất hiếu với liệt tổ liệt tông và ông đã lạm dụng quyền làm cha mà hành hạ tinh thần của cả Nga và Chi rất khắc nghiệt. Hành hạ không xong ông ta thẳng tay trừng trị thể xác và ra tối hậu thư bắt đứa con gái phải tuyệt giao với người tình. ', 32, 3, 1, 10, 'https://salt.tikicdn.com/cache/400x400/ts/product/ce/9a/4e/cf0e0e8d2871f6de5e19b8c29cf32053.jpg.webp'),
+(Null, 'Sống mòn', 'Sống mòn là một tác phẩm mang đầy chất hiện thực và tự sự, đôi lúc cảm tưởng như đây là cuốn nhật ký cho một quãng đời của tác giả. Câu chuyện bắt đầu giản dị bằng một ngày mới ở trường của ông giáo Thứ – nhân vật chính tạo nên góc nhìn của toàn bộ tác phẩm. Rồi từng ngày trôi đi, với những sự việc thường ngày, cũng gọi là có cái để kể nhưng chẳng hề giật gân, hấp dẫn hay khốc liệt một chút nào!', 84, 3, 2, 10, 'https://salt.tikicdn.com/cache/400x400/ts/product/68/c5/5e/7b2956569cbe8eedf9fbc8512a3472b0.jpg.webp'),
+(Null, 'Người kép già', 'Người kép già bao gồm những truyện ngắn và vừa của nhà văn Kim Lân mà tôi đã đọc những truyện này và có truyện đọc rất nhiều lần. Nhưng ấn bản lần này vẫn làm tôi ngập tràn cảm hứng và chìm sâu trong suy tưởng khi đọc lại. […] Những tác phẩm trong cuốn sách này của ông là những câu chuyện đời sống của gần một thế kỷ trước. Nhưng tất cả vẫn như vừa diễn ra', 262, 3, 4, 10, 'https://salt.tikicdn.com/cache/400x400/ts/product/72/1b/4a/4746910d15a04fe09090666457b7a7ec.jpg.webp'),
+(Null, 'Chuyện làng cuội', 'Đó là một câu chuyện trải dài mấy chục năm, từ đời ông đến đời con, rồi đến đời cháu, suốt mấy thời kỳ, từ trước Cách mạng tháng tám, đến cải cách ruộng đất, rồi đến những năm đầu chuyển sang cơ chế thị trường. Với một cốt chuyện hấp dẫn, “Chuyện làng cuội” đã tái hiện chân thực về cuộc sống con người và vùng quê sông Hồng trong sự chuyển mình của làng quê, của Đất nước trong thời kỳ đổi mới', 102, 3, 3, 10, 'https://salt.tikicdn.com/cache/400x400/ts/product/ad/5c/d9/ff824e4e3c5f12ecad427e5e9947dc97.jpg.webp'),
+(Null, 'Vượt côn đảo', 'Vượt Côn Đảo cần được nhìn nhận như đó chính là con người Phùng Quán; chính là Phùng Quán đã tham gia cuộc "vượt Côn Đảo", cũng như Người người lớp lớp cần phải được nhìn nhận như đó chính là con người Trần Dần. Hai nhà thơ, hai cõi lòng chân thành, hai con người thật sự trong trắng, hai miếng đất màu để tự họ biến thành hai tác giả tạo ra hai tác phẩm suy cho cùng thì không "hiện thực" lắm, hoặc không hiện thực một cách nghiêm nhặt, nhưng là hai tác phẩm có đủ khuyết tật của mọi tác phẩm nghệ thuật thực thụ.', 70, 3, 2, 10, 'https://salt.tikicdn.com/cache/400x400/media/catalog/product/9/7/9786046982524.u3059.d20170619.t140253.751762.jpg.webp'),
+(Null, 'Cá bống mú', 'Cá bống mú là một bức tranh sinh động khắc họa rõ nét cuộc sống của người dân xóm Kèo Nèo khi ấy với tình làng nghĩa xóm sâu đậm của cụ Tám Hiền, Tư U, Kim Diêu,…ai ai cũng biết mình khổ nhưng không thể nào cứu mình ra khỏi nỗi cay đắng ấy. Với Đấu, giác ngộ cách mạng được trở thành Đảng viên và được đứng trong hàng ngũ vinh dự ấy như ánh sáng soi đường để anh và người dân có một cuộc sống ấm no, yên bình mà không phải chịu cảnh đói nghèo, bom rơi, đạn lạ', 49, 3, 4, 10, 'https://salt.tikicdn.com/cache/400x400/ts/product/f6/aa/33/b620976286b5dca50e6abeddb53986c7.jpg.webp'),
+(Null, 'Chiếc lư đồng mắt cua', '...', 68, 3, 2, 10, 'https://salt.tikicdn.com/cache/400x400/media/catalog/product/c/h/chiec_lu_dong_mat_cua_1.jpg.webp');
 
 
 INSERT INTO author VALUES
@@ -93,7 +97,15 @@ INSERT INTO author VALUES
 (NULL, 'Nguyễn Trọng Phụng', 'https://photo-cms-vovworld.zadn.vn/w500/uploaded/vovworld/znaeng/2018_12_24/vtp_dwve.jpg'),
 (NULL, 'Tô Hoài', 'https://upload.wikimedia.org/wikipedia/vi/thumb/7/73/Nhavan_t%C3%B4_ho%C3%A0i.jpg/220px-Nhavan_t%C3%B4_ho%C3%A0i.jpg'),
 (NULL, 'Hoài Thanh', 'https://nguoinoitieng.tv/images/thumbnail/1/5a.jpg'),
-(NULL, 'Ngô Tất Tố', 'https://upload.wikimedia.org/wikipedia/vi/thumb/9/92/NgoTatTo.jpg/175px-NgoTatTo.jpg');
+(NULL, 'Ngô Tất Tố', 'https://upload.wikimedia.org/wikipedia/vi/thumb/9/92/NgoTatTo.jpg/175px-NgoTatTo.jpg'),
+(NULL, 'Đoàn Giỏi', 'https://upload.wikimedia.org/wikipedia/vi/c/c6/%C4%90o%C3%A0n_Gi%E1%BB%8Fi.jpg'),
+(NULL, 'Thạch Lam', 'https://sachgiai.com/uploads/news/2018_05/nha-van-thach-lam.jpg'),
+(Null, 'Nguyễn Hồng', 'https://znews-photo.zingcdn.me/w660/Uploaded/oplukaa/2018_07_10/Nguyen_Hong_Top.jpg'),
+(Null, 'Kim Lân', 'https://cdnimg.vietnamplus.vn/uploaded/ngtnnn/2020_11_16/1611kimlan.jpg'),
+(Null, 'Phùng Quán', 'https://vanchuongphuongnam.vn/wp-content/uploads/2019/08/Nh%C3%A0-th%C6%A1-Ph%C3%B9ng-Qu%C3%A1n-2.jpg'),
+(Null, 'Nguyễn Tuân', 'https://upload.wikimedia.org/wikipedia/vi/2/2e/Tu%C3%A2n_Nguy%E1%BB%85n.jpg'),
+(Null, 'Lê Lựu', 'https://suckhoedoisong.qltns.mediacdn.vn/Images/Uploaded/Share/2012/01/02/cdfLE20LUU20120copy1.jpg'),
+(Null, 'Nguyễn Công Hoan', 'https://hopamviet.vn/assets/images/editor/1213096198.jpg');
 
 
 INSERT INTO book_author VALUES
@@ -114,4 +126,26 @@ INSERT INTO book_author VALUES
 (15, 1),
 (16, 1),
 (17, 1),
-(18, 6);
+(18, 6),
+(19, 3),
+(20, 7),
+(21, 6),
+(22, 4),
+(23, 8),
+(24, 8),
+(25, 9),
+(26, 10),
+(27, 11),
+(28, 3),
+(29, 12),
+(30, 13),
+(31, 9),
+(32, 13),
+(33, 14),
+(34, 14),
+(35, 2),
+(36, 10),
+(37, 13),
+(38, 11),
+(39, 7),
+(40, 12);
