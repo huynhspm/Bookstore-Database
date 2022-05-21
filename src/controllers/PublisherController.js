@@ -1,4 +1,4 @@
-const connection = require("../connection_database/connector.js");
+const connection = require('../connection_database/connector.js');
 
 class PublisherController {
   // [GET] /publisher
@@ -18,7 +18,7 @@ class PublisherController {
       if (error) {
         return console.error(error.message);
       }
-      res.render("publisher/detail", { books: results, publisher: name });
+      res.render('publisher/detail', { books: results, publisher: name });
     });
   }
 
@@ -34,7 +34,7 @@ class PublisherController {
         return console.error(error.message);
       }
 
-      res.render("publisher/edit", { publisher: results[0] });
+      res.render('publisher/edit', { publisher: results[0] });
     });
   }
 
@@ -58,7 +58,7 @@ class PublisherController {
 
       show(res);
     });
-  }  
+  }
 }
 
 module.exports = new PublisherController();
@@ -69,6 +69,6 @@ function show(res) {
     if (error) {
       return console.error(error.message);
     }
-    res.render("publisher/show", { publishers: results });
+    res.render('publisher/show', { publishers: results });
   });
 }

@@ -1,4 +1,4 @@
-const connection = require("../connection_database/connector.js");
+const connection = require('../connection_database/connector.js');
 
 class AuthorController {
   // [GET] /author
@@ -20,7 +20,7 @@ class AuthorController {
       if (error) {
         return console.error(error.message);
       }
-      res.render("author/detail", { books: results, author: name });
+      res.render('author/detail', { books: results, author: name });
     });
   }
 
@@ -36,7 +36,7 @@ class AuthorController {
         return console.error(error.message);
       }
 
-      res.render("author/edit", { author: results[0] });
+      res.render('author/edit', { author: results[0] });
     });
   }
 
@@ -73,6 +73,6 @@ function show(res) {
     if (error) {
       return console.error(error.message);
     }
-    res.render("author/show", { authors: results });
+    res.render('author/show', { authors: results });
   });
 }

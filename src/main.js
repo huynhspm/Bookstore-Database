@@ -1,13 +1,13 @@
 const path = require('path');
 const express = require('express');
 const morgan = require('morgan');
-const methodOverride = require('method-override');  
+const methodOverride = require('method-override');
 const { engine } = require('express-handlebars');
 const { urlencoded } = require('express');
 const mysql = require('mysql');
 
 const app = express();
-const port = 3000;
+const port = process.env.PORT || 3000;
 const route = require('./routes/index.js');
 
 app.use(express.urlencoded({ extended: true }));

@@ -1,4 +1,4 @@
-const connection = require("../connection_database/connector.js");
+const connection = require('../connection_database/connector.js');
 
 class BookController {
   // [GET] /books
@@ -15,7 +15,7 @@ class BookController {
               ORDER BY b.title DESC`;
     show_all(res, sql);
   }
-  
+
   //[GET] / books/title_asc
   title_asc(req, res, next) {
     let sql = `SELECT * 
@@ -48,7 +48,7 @@ class BookController {
 
   // [GET] /books/create
   create(req, res, next) {
-    res.render("books/create");
+    res.render('books/create');
   }
 
   // [POST] /books/store
@@ -61,7 +61,7 @@ class BookController {
     let book = data;
 
     solve_publisher(publisher, author, book);
-    res.render("books/create");
+    res.render('books/create');
   }
 
   // [GET] books/:id/edit
@@ -76,7 +76,7 @@ class BookController {
         return console.error(error.message);
       }
 
-      res.render("books/edit", { book: results[0] });
+      res.render('books/edit', { book: results[0] });
     });
   }
 
@@ -96,7 +96,7 @@ class BookController {
     let book = Object.keys(json_data).map((key) => [json_data[key]]);
     book.splice(6, 0, book_id);
 
-    console.log(book)
+    console.log(book);
 
     connection.query(sql, book, function (error, results) {
       if (error) {
@@ -124,7 +124,7 @@ function show_all(res, sql) {
       return console.error(error.message);
     }
 
-    res.render("books/show_all", { books: results});
+    res.render('books/show_all', { books: results });
   });
 }
 
@@ -137,7 +137,7 @@ function show_detail(res, title) {
       return console.error(error.message);
     }
 
-    res.render("books/show_detail", { book: results[0] });
+    res.render('books/show_detail', { book: results[0] });
   });
 }
 
@@ -225,7 +225,7 @@ function delete_book(res, book_id) {
   let sql = `DELETE
             FROM book
             WHERE book_id=?`;
-  connection.query(sql, [book_id], function(error, results){
+  connection.query(sql, [book_id], function (error, results) {
     if (error) {
       return console.error(error.message);
     }
