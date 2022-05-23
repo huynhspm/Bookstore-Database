@@ -11,3 +11,10 @@
 ![image](https://user-images.githubusercontent.com/40020471/169754946-94d99a02-349e-44bf-a72d-43d4278ea4c7.png)
 
 ![image](https://user-images.githubusercontent.com/40020471/169754978-62ef443c-d509-45a3-b7b7-b11c04fc87a9.png)
+
+### 2. Các tính năng:
+
+- SEARCH: tìm kiếm theo tên sách, tên tác giả, tên nhà xuất bản
+- UPDATE: chỉnh sửa sách, tác giả, nhà xuất bản
+- DELETA: Xóa sách
+- ADD: Thêm sách 
